@@ -2,7 +2,7 @@ import { db } from '@/lib/db';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-export const OPTIONS: NextAuthOptions = {
+export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Sign In With Username & Password',
@@ -33,13 +33,8 @@ export const OPTIONS: NextAuthOptions = {
   pages: {
     signIn: '/auth/sign-in',
   },
-  callbacks: {
-    session: ({ session, token }) => {
-      return session;
-    },
-  },
 };
 
-const handler = NextAuth(OPTIONS);
+const handler = NextAuth(options);
 
 export { handler as GET, handler as POST };
