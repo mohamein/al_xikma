@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+}
+
+// employee
+
+model Employee {
+  id      String  @id @default(uuid())
+  name    String
+  email   String?
+  address String
+  phone   String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+// salary
+
+model Salary {
+  id        String @id @default(uuid())
+  amount    Float
+  horumarin Float
+
+  employee String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+// Elevators
+model SmallElevator {
+  id          String @id @default(uuid())
+  customer    String
+  description String
+  price       Float
+  receipt_no  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model MiddleElevator {
+  id          String @id @default(uuid())
+  customer    String
+  description String
+  price       Float
+  receipt_no  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+// Final Table
+
+model FinalTable {
+  id            String @id @default(uuid())
+  fuel          Float
+  shaxaad       Float
+  salary        Float
+  expenses      Float
+  description   String
+  total         Float
+  feePercentage Float
+
+  totalAmount Float
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
