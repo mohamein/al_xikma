@@ -18,8 +18,8 @@ export const salaryValidation = z.object({
   employee: z.string().min(2, {
     message: 'employeeId must be at least 2 characters',
   }),
-  amount: z.number().min(2),
-  horumarin: z.number().min(2),
+  amount: z.number().int(),
+  horumarin: z.number().int(),
 });
 
 export const craneValidation = z.object({
@@ -34,14 +34,12 @@ export const craneValidation = z.object({
 });
 
 export const expenseValidation = z.object({
-  fuel: z.number().min(2),
-  shaxaad: z.number().min(2),
-  salary: z.number().min(2),
-  expenses: z.number().min(2),
+  fuel: z.number().int(),
+  shaxaad: z.number().int(),
+  salary: z.number().int(),
+  expenses: z.number().int(),
   description: z.string().min(2, {
     message: 'employeeId must be at least 2 characters',
   }),
-  total: z.number().min(2),
-  feePercentage: z.number().min(2),
-  totalAmount: z.number().min(2),
+  total: z.number().int(),
 });

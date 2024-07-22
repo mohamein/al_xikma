@@ -24,8 +24,6 @@ const ExpenseForm = () => {
       expenses: 0,
       description: '',
       total: 0,
-      feePercentage: 0,
-      totalAmount: 0,
     },
   });
 
@@ -39,8 +37,6 @@ const ExpenseForm = () => {
         expenses: values.expenses,
         description: values.description,
         total: values.total,
-        feePercentage: values.feePercentage,
-        totalAmount: values.totalAmount,
       };
       const expenseData = await createExpense(expense);
 
@@ -100,13 +96,6 @@ const ExpenseForm = () => {
             label="Total:"
             placeholder="Enter Total..."
           />
-          <FormFields
-            control={form.control}
-            type="number"
-            name="feePercentage"
-            label="Fee Percentage:"
-            placeholder="Enter Total..."
-          />
         </div>
         <FormFields
           control={form.control}
@@ -114,13 +103,6 @@ const ExpenseForm = () => {
           name="description"
           label="Description:"
           placeholder="Enter description..."
-        />
-        <FormFields
-          control={form.control}
-          type="number"
-          name="totalAmount"
-          label="Total:"
-          placeholder="Enter Total..."
         />
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>

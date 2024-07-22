@@ -74,16 +74,13 @@ model MiddleElevator {
 // Final Table
 
 model FinalTable {
-  id            String @id @default(uuid())
-  fuel          Float
-  shaxaad       Float
-  salary        Float
-  expenses      Float
-  description   String
-  total         Float
-  feePercentage Float
-
-  totalAmount Float
+  id          String @id @default(uuid())
+  fuel        Float
+  shaxaad     Float
+  salary      Float
+  expenses    Float
+  description String
+  total       Float
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt

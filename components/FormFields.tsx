@@ -33,7 +33,8 @@ const FormFields = (props: CustomProps) => {
             {type === 'number' ? (
               <Input
                 type={type!}
-                min={100}
+                min="1"
+                max="100"
                 placeholder={placeholder!}
                 {...field}
                 onChange={(e) => field.onChange(e.target.valueAsNumber)}
