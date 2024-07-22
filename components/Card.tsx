@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
 
       <div className="flex flex-col items-start space-y-2">
         <h3 className="text-base font-semibold text-white">{title}</h3>
-        <h2 className="text-4xl text-white font-bold">{length.toString()}</h2>
+        <h2 className="text-4xl text-white font-bold">{length}</h2>
       </div>
     </div>
   );
