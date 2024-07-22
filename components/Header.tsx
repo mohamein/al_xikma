@@ -3,10 +3,12 @@
 import React from 'react';
 import { signOut } from 'next-auth/react';
 import { FaPowerOff } from 'react-icons/fa';
+import Link from 'next/link';
 const Header = () => {
   return (
     <header className="h-[15vh] bg-white shadow-sm">
       <div className="flex items-center justify-end p-6 gap-2">
+        <Link href="/dashboard/invoice">Add Invoice</Link>
         <h2 className="text-base text-slate-700 font-semibold">Admin</h2>
         <button onClick={() => signOut({ callbackUrl: '/auth/sign-in' })}>
           <FaPowerOff size={20} className="text-rose-400" />

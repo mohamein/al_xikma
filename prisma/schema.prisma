@@ -88,3 +88,14 @@ model FinalTable {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
+
+model InvoiceTable {
+  id          String @id @default(uuid())
+  customer    String
+  description String
+  price       Float
+  receipt_no  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}

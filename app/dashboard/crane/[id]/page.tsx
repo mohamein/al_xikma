@@ -1,17 +1,26 @@
 'use client';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CraneTable from '@/components/CraneTable';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import { getCrane1, getCrane2 } from '@/lib/actions/crane.actions';
+interface Crane {
+  id: string;
+  customer: string;
+  description: string;
+  price: number;
+  receipt_no: string;
+  createdAt: Date;
+  updatedAt: Date; // Note: it's `updatedAt` not `updateAt`
+}
 
-const Crane = ({ params }) => {
-  const [data, setData] = useState([]);
+const Crane = ({ params }: { params: any }) => {
+  const [data, setData] = useState<Crane[]>([]);
 
   useEffect(() => {
     if (params.id === '1') {
       const fetchData = async () => {
-        const crane = await getCrane1();
+        const crane: any = await getCrane1();
 
         setData(crane);
       };
@@ -19,7 +28,7 @@ const Crane = ({ params }) => {
       fetchData();
     } else {
       const fetchData = async () => {
-        const crane = await getCrane2();
+        const crane: any = await getCrane2();
 
         setData(crane);
       };
@@ -41,7 +50,7 @@ const Crane = ({ params }) => {
         Create
       </Link>
 
-      <CraneTable data={data} id={params.id} />
+      <CraneTable data={data} />
     </div>
   );
 };

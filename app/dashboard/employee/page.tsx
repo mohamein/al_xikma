@@ -13,7 +13,7 @@ interface EmployeeData {
   address: string;
 }
 const Employee = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<EmployeeData[]>([]);
   const tableHead = {
     fullName: 'FullName',
     email: 'Email',
@@ -23,7 +23,7 @@ const Employee = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await getAllEmployee();
+      const resp: any = await getAllEmployee();
 
       if (resp) {
         setData(resp);

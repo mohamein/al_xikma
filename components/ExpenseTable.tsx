@@ -6,8 +6,19 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/table';
+interface ExpenseProps {
+  data: any;
+}
+const ExpenseTable = ({ data }: ExpenseProps) => {
+  const formatDate = (date: Date) => {
+    const dateOptions: any = {
+      year: 'numeric',
+      month: 'long', // or 'short' or 'numeric'
+      day: 'numeric',
+    };
 
-const ExpenseTable = ({ data }) => {
+    return date.toLocaleDateString(undefined, dateOptions);
+  };
   return (
     <div className="bg-white shadow-md">
       <Table>
@@ -21,10 +32,11 @@ const ExpenseTable = ({ data }) => {
             <TableHead className="text-white">Total:</TableHead>
             <TableHead className="text-white">Fee Percentage:</TableHead>
             <TableHead className="text-white">Total Amount:</TableHead>
+            <TableHead className="text-white">Date:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((expense) => (
+          {data.map((expense: any) => (
             <TableRow key={expense.id}>
               <TableCell>{expense.fuel}</TableCell>
               <TableCell>{expense.shaxaad}</TableCell>
@@ -34,6 +46,7 @@ const ExpenseTable = ({ data }) => {
               <TableCell>{expense.total}</TableCell>
               <TableCell>{expense.feePercentage}</TableCell>
               <TableCell>{expense.totalAmount}</TableCell>
+              <TableCell>{formatDate(expense.createdAt)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -12,6 +12,7 @@ declare interface SalaryParams {
 }
 
 declare interface CraneParams {
+  id?: string;
   customer: string;
   description: string;
   price: number;

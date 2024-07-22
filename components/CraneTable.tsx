@@ -9,12 +9,11 @@ import {
 } from '@/components/ui/table';
 
 interface TableProps {
-  id: string;
-  data: [];
+  data: any;
 }
 
-const CraneTable = ({ id, data }: TableProps) => {
-  const RenderTable = (id) => {
+const CraneTable = ({ data }: TableProps) => {
+  const RenderTable = () => {
     return (
       <Table>
         <TableHeader className="bg-[#395CA0]">
@@ -26,7 +25,7 @@ const CraneTable = ({ id, data }: TableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((crane) => (
+          {data.map((crane: any) => (
             <TableRow key={crane.id}>
               <TableCell>{crane.customer}</TableCell>
               <TableCell>{crane.description}</TableCell>
@@ -40,7 +39,7 @@ const CraneTable = ({ id, data }: TableProps) => {
   };
   return (
     <div className="bg-white shadow-md">
-      <RenderTable id={id} />
+      <RenderTable />
     </div>
   );
 };

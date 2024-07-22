@@ -18,8 +18,8 @@ export const salaryValidation = z.object({
   employee: z.string().min(2, {
     message: 'employeeId must be at least 2 characters',
   }),
-  amount: z.number(),
-  horumarin: z.number(),
+  amount: z.number().min(2),
+  horumarin: z.number().min(2),
 });
 
 export const craneValidation = z.object({
@@ -29,7 +29,7 @@ export const craneValidation = z.object({
   description: z.string().min(2, {
     message: 'employeeId must be at least 2 characters',
   }),
-  price: z.number().min(2),
+  price: z.number(),
   receipt_no: z.string().min(2),
 });
 

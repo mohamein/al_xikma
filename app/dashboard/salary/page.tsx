@@ -4,12 +4,19 @@ import { useState, useEffect } from 'react';
 import SalaryTable from '@/components/SalaryTable';
 import { getAllSalary } from '@/lib/actions/salary.actions';
 import { FaPlusCircle } from 'react-icons/fa';
+
+interface SalaryProps {
+  id: string;
+  customer: string;
+  amount: number;
+  horumarin: number;
+}
 const Salary = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<SalaryProps[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const salary = await getAllSalary();
+      const salary: any = await getAllSalary();
 
       if (salary) {
         setData(salary);

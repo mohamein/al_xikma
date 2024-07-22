@@ -5,8 +5,20 @@ import Link from 'next/link';
 
 import ExpenseTable from '@/components/ExpenseTable';
 import { getAllExpenses } from '@/lib/actions/expense.actions';
+
+interface ExpenseData {
+  id: string;
+  fuel: number;
+  shaxaad: number;
+  salary: number;
+  expenses: number;
+  description: string;
+  total: number;
+  feePercentage: number;
+  totalAmount: number;
+}
 const Expense = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ExpenseData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {

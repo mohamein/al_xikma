@@ -36,16 +36,7 @@ const FormFields = (props: CustomProps) => {
         <FormItem>
           <FormLabel>{label!}</FormLabel>
           <FormControl>
-            {type === 'select' ? (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder={placeholder} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>{props.children}</SelectContent>
-              </Select>
-            ) : type === 'number' ? (
+            {type === 'number' ? (
               <Input
                 type={type!}
                 min={100}
