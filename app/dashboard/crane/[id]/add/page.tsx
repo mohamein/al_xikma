@@ -2,12 +2,7 @@
 import Crane from '@/components/forms/Crane';
 import React from 'react';
 
-interface ParamsProp {
-  params: string;
-}
-const AddCrane = ({ params }: ParamsProp) => {
-  const { id } = params;
-
+const AddCrane = ({ params }: any) => {
   return (
     <div className="flex flex-col mx-4">
       <div className="space-y-2">
@@ -18,7 +13,7 @@ const AddCrane = ({ params }: ParamsProp) => {
           crane form creation.
         </p>
       </div>
-      <Crane id={id} />
+      <Crane id={params.id} />
     </div>
   );
 };
