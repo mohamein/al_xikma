@@ -30,8 +30,6 @@ const ExpenseTable = ({ data }: ExpenseProps) => {
             <TableHead className="text-white">Expenses:</TableHead>
             <TableHead className="text-white">Description:</TableHead>
             <TableHead className="text-white">Total:</TableHead>
-            <TableHead className="text-white">Fee Percentage:</TableHead>
-            <TableHead className="text-white">Total Amount:</TableHead>
             <TableHead className="text-white">Date:</TableHead>
           </TableRow>
         </TableHeader>
@@ -44,8 +42,6 @@ const ExpenseTable = ({ data }: ExpenseProps) => {
               <TableCell>{expense.expenses}</TableCell>
               <TableCell>{expense.description}</TableCell>
               <TableCell>{expense.total}</TableCell>
-              <TableCell>{expense.feePercentage}</TableCell>
-              <TableCell>{expense.totalAmount}</TableCell>
               <TableCell>{formatDate(expense.createdAt)}</TableCell>
             </TableRow>
           ))}
