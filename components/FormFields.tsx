@@ -35,6 +35,7 @@ const FormFields = (props: CustomProps) => {
                 type={type!}
                 min="1"
                 max="100"
+                pattern="[0-9]*"
                 placeholder={placeholder!}
                 {...field}
                 onChange={(e) => field.onChange(e.target.valueAsNumber)}
