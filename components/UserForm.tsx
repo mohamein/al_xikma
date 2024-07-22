@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface UserProps {
-  email: String;
+  email: string;
   setEmail: (email: string) => void;
-  password: String;
+  password: string;
   setPassword: (password: string) => void;
   handleSubmit: (email: string, password: string) => void;
 }

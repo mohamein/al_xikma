@@ -10,7 +10,7 @@ import SubmitButton from '../SubmitButton';
 import { useRouter } from 'next/navigation';
 import { createCrane1, createCrane2 } from '@/lib/actions/crane.actions';
 
-const Crane = ({ id }) => {
+const Crane = ({ id }: any) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof craneValidation>>({

@@ -7,7 +7,9 @@ interface ButtonProps {
 }
 const SubmitButton = ({ children, isLoading }: ButtonProps) => {
   return (
-    <Button className="w-full mt-4">{isLoading ? 'Loading' : children}</Button>
+    <Button className="w-full mt-4">
+      {isLoading ? 'Loading....' : children}
+    </Button>
   );
 };
 
