@@ -5,16 +5,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getInVoice } from '@/lib/actions/invoice.actions';
 import { Button } from '@/components/ui/button';
 import { FaDownload } from 'react-icons/fa';
-interface InvoiceProps {
-  id: string;
-  customer: string;
-  description: string;
-  price: number;
-  receipt_no: number;
-  createdAt: Date;
-}
+
 const InvoiceDownload = ({ params }: any) => {
-  const [invoice, setInvoice] = useState<InvoiceProps[]>([]);
+  const [invoice, setInvoice] = useState<any>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fetchInvoice = async (id: string) => {
@@ -60,33 +53,31 @@ const InvoiceDownload = ({ params }: any) => {
       <div className="bg-white shadow-md p-4 h-[300px] w-[550px]">
         <h2 className="text-xl text-slate-600 font-semibold">Invoice Data</h2>
 
-        <div
-          ref={contentRef}
-          className="flex  justify-between items-start mt-5"
-        >
-          <div className="flex flex-col space-y-2 items-start">
-            <h3 className="text-slate-600 text-base font-medium capitalize">
-              Customer: {invoice?.customer}
-            </h3>
-            <p className="text-sm text-gray-400 font-normal">
-              Description: {invoice?.description}
+        <div ref={contentRef} className="flex flex-col mt-5">
+          <div className="flex justify-between items-start">
+            <div className="flex flex-col space-y-2 items-start">
+              <h3 className="text-slate-600 text-base font-medium capitalize">
+                Customer: {invoice?.customer}
+              </h3>
+              <p className="text-sm text-gray-400 font-normal">
+                Description: {invoice?.description}
+              </p>
+            </div>
+
+            <div className="flex flex-col space-y-2">
+              <h3 className="text-2xl font-semibold text-slate-700">
+                Price:${invoice?.price}
+              </h3>
+              <p className="text-sm text-gray-400 ">
+                Receipt No:{invoice?.receipt_no}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-end mt-20">
+            <p className="text-gray-600 font-light">
+              Date:{formateDate(invoice?.createdAt)}
             </p>
           </div>
-
-          <div className="flex flex-col space-y-2">
-            <h3 className="text-2xl font-semibold text-slate-700">
-              Price:${invoice?.price}
-            </h3>
-            <p className="text-sm text-gray-400 ">
-              Receipt No:{invoice?.receipt_no}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex justify-end mt-20">
-          <p className="text-gray-600 font-light">
-            Date:{formateDate(invoice?.createdAt)}
-          </p>
         </div>
       </div>
     </div>
