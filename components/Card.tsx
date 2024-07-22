@@ -5,7 +5,7 @@ import { IconType } from 'react-icons';
 interface CardProps {
   title: string;
   Icon: IconType;
-  length: string;
+  length: number;
   link: string;
   className: string;
 }

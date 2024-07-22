@@ -2,7 +2,7 @@ import Card from '@/components/Card';
 import { FaUser } from 'react-icons/fa';
 import { getAllEmployee } from '@/lib/actions/employee.actions';
 const Dashboard = async () => {
-  const employee = await getAllEmployee();
+  const employee: any = await getAllEmployee();
   return (
     <>
       {/* cards */}
@@ -22,7 +22,7 @@ const Dashboard = async () => {
             Icon={() => (
               <FaUser size={64} className="text-gray-300 opacity-30" />
             )}
-            length="0"
+            length={0}
             link="/dashboard/salary"
             className="bg-[#13585f] "
           />
@@ -31,7 +31,7 @@ const Dashboard = async () => {
             Icon={() => (
               <FaUser size={64} className="text-gray-300 opacity-30" />
             )}
-            length="0"
+            length={0}
             link="/dashboard/employee"
             className="bg-[#1c5db1] "
           />
