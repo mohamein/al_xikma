@@ -22,7 +22,7 @@ const Expense = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const expense = await getAllExpenses();
+      const expense: any = await getAllExpenses();
 
       if (expense) {
         setData(expense);

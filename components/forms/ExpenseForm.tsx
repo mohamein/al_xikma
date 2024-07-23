@@ -88,15 +88,14 @@ const ExpenseForm = () => {
           />
         </div>
 
-        <div className="flex gap-2">
-          <FormFields
-            control={form.control}
-            type="number"
-            name="total"
-            label="Total:"
-            placeholder="Enter Total..."
-          />
-        </div>
+        <FormFields
+          control={form.control}
+          type="number"
+          name="total"
+          label="Total:"
+          placeholder="Enter Total..."
+        />
+
         <FormFields
           control={form.control}
           type="text"
