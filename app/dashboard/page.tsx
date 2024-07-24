@@ -57,7 +57,7 @@ const Dashboard = async () => {
               </TableHeader>
 
               <TableBody>
-                {employee.slice(0, 4).map((list: any) => (
+                {employee?.slice(0, 4).map((list: any) => (
                   <TableRow key={list.id}>
                     <TableCell>{list.name}</TableCell>
                     <TableCell>{list.email}</TableCell>
