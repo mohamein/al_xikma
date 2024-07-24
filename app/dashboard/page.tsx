@@ -1,5 +1,15 @@
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import Card from '@/components/Card';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaFileInvoice } from 'react-icons/fa';
+import { TbCarCrane } from 'react-icons/tb';
 import { getAllEmployee } from '@/lib/actions/employee.actions';
 const Dashboard = async () => {
   const employee: any = await getAllEmployee();
@@ -14,32 +24,54 @@ const Dashboard = async () => {
               <FaUser size={64} className="text-gray-300 opacity-30" />
             )}
             length={employee?.length}
-            link="/dashboard/employee"
             className="bg-[#c64765]"
           />
           <Card
-            title="Budget"
+            title="Crane"
             Icon={() => (
-              <FaUser size={64} className="text-gray-300 opacity-30" />
+              <TbCarCrane size={64} className="text-gray-300 opacity-30" />
             )}
-            length={0}
-            link="/dashboard/salary"
+            length={2}
             className="bg-[#13585f] "
           />
           <Card
-            title="Employee"
+            title="Invoices"
             Icon={() => (
-              <FaUser size={64} className="text-gray-300 opacity-30" />
+              <FaFileInvoice size={64} className="text-gray-300 opacity-30" />
             )}
             length={0}
-            link="/dashboard/employee"
             className="bg-[#1c5db1] "
           />
         </div>
 
         {/* Table */}
+        <div className="flex  gap-4">
+          <div className="bg-white shadow-md mx-2 flex-1">
+            <Table>
+              <TableHeader className="bg-[#395CA0]">
+                <TableRow>
+                  <TableHead className="text-white">FullName</TableHead>
+                  <TableHead className="text-white">Email</TableHead>
+                  <TableHead className="text-white">Phone</TableHead>
+                </TableRow>
+              </TableHeader>
 
-        <h2>Table</h2>
+              <TableBody>
+                {employee.slice(0, 4).map((list: any) => (
+                  <TableRow key={list.id}>
+                    <TableCell>{list.name}</TableCell>
+                    <TableCell>{list.email}</TableCell>
+                    <TableCell>{list.phone}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="flex-1">
+            <h2>Invoice</h2>
+          </div>
+        </div>
       </div>
     </>
   );

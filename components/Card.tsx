@@ -6,16 +6,9 @@ interface CardProps {
   title: string;
   Icon: IconType;
   length: number;
-  link: string;
   className: string;
 }
-const Card: React.FC<CardProps> = ({
-  title,
-  Icon,
-  length,
-  link,
-  className,
-}) => {
+const Card: React.FC<CardProps> = ({ title, Icon, length, className }) => {
   return (
     <div
       className={`${className} w-[300px] h-[150px] rounded-md shadow-sm border flex items-center px-4 justify-between`}

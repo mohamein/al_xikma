@@ -1,10 +1,20 @@
 'use client';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '@/components/ui/table';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import React, { useState, useEffect, useRef } from 'react';
-import { getInVoice } from '@/lib/actions/invoice.actions';
-import { Button } from '@/components/ui/button';
 import { FaDownload } from 'react-icons/fa';
+import { getInVoice } from '@/lib/actions/invoice.actions';
 
 const InvoiceDownload = ({ params }: any) => {
   const [invoice, setInvoice] = useState<any>(null);
@@ -41,46 +51,104 @@ const InvoiceDownload = ({ params }: any) => {
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('download.pdf');
+    pdf.save('invoice.pdf');
   };
   return (
-    <div>
-      <Button className="mb-4 text-base" onClick={handleDownload}>
-        <FaDownload size={18} className="mr-2" />
-        Download
-      </Button>
+    <>
+      <div className="flex items-center justify-end w-[600px] mx-auto">
+        <Button className=" w-[90px] rounded-md">
+          <FaDownload size={18} onClick={handleDownload} />
+        </Button>
+      </div>
 
-      <div className="bg-white shadow-md p-4 h-[300px] w-[550px]">
-        <h2 className="text-xl text-slate-600 font-semibold">Invoice Data</h2>
+      <div
+        ref={contentRef}
+        className="max-h-screen bg-white shadow-md w-[600px] mx-auto p-6"
+      >
+        <div className="flex items-center justify-between mb-10 border-b border-black py-2">
+          <h1 className="text-3xl text-slate-800 font-bold">Invoice</h1>
 
-        <div ref={contentRef} className="flex flex-col mt-5">
-          <div className="flex justify-between items-start">
-            <div className="flex flex-col space-y-2 items-start">
-              <h3 className="text-slate-600 text-base font-medium capitalize">
-                Customer: {invoice?.customer}
+          <Image
+            src="/images/logo.png"
+            className="object-contain"
+            alt="logo"
+            width={80}
+            height={80}
+          />
+        </div>
+
+        {/* Invoice Info */}
+
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <h2 className="text-[#222] text-xl font-semibold">Invoice To:</h2>
+            <h3 className="text-base text-slate-700 font-medium">
+              Company Name
+            </h3>
+          </div>
+          <div className="flex  flex-col">
+            <div className="flex gap-4">
+              <h3 className="text-slate-700 text-base font-semibold mr-4">
+                Invoice#
               </h3>
-              <p className="text-sm text-gray-400 font-normal">
-                Description: {invoice?.description}
-              </p>
+              <p className="text-gray-400 text-[15px] font-normal">A109</p>
             </div>
-
-            <div className="flex flex-col space-y-2">
-              <h3 className="text-2xl font-semibold text-slate-700">
-                Price:${invoice?.price}
-              </h3>
-              <p className="text-sm text-gray-400 ">
-                Receipt No:{invoice?.receipt_no}
+            <div className="flex  gap-4">
+              <h3 className="text-slate-700 text-base font-semibold">Date:</h3>
+              <p className="text-gray-400 text-[15px] font-normal">
+                01/07/2024
               </p>
             </div>
           </div>
-          <div className="flex justify-end mt-20">
-            <p className="text-gray-600 font-light">
-              Date:{formateDate(invoice?.createdAt)}
-            </p>
+        </div>
+
+        <div className="mb-10">
+          {/* Invoice Table */}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Description:</TableHead>
+                <TableHead>Price:</TableHead>
+                <TableHead>Total:</TableHead>
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              <TableRow>
+                <TableCell>Qaadis Baabur</TableCell>
+                <TableCell>$700</TableCell>
+                <TableCell>$700</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <h2 className="text-base text-slate-700 font-semibold">
+            Thank You For Your Business
+          </h2>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-6 border-b border-black pb-2">
+              <div className="flex flex-col gap-2">
+                <p className="text-slate-800 text-[15px] font-semibold">
+                  Sub Total:
+                </p>
+                <p className="text-slate-800 text-[15px] font-semibold">Tax:</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="font-medium">$700</span>
+                <span className="font-medium">0.00%</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-slate-800 text-[15px] font-semibold">Total:</p>
+              <span className="font-medium text-base">$700</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

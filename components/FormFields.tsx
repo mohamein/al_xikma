@@ -15,7 +15,7 @@ import React from 'react';
 interface CustomProps {
   control: Control<any>;
   name?: string;
-  label: string;
+  label?: string;
   placeholder: string;
   type: string;
   children?: React.ReactNode;
@@ -33,8 +33,8 @@ const FormFields = (props: CustomProps) => {
             {type === 'number' ? (
               <Input
                 type={type!}
-                min="1"
-                max="100"
+                min="5"
+                max="9999"
                 pattern="[0-9]*"
                 placeholder={placeholder!}
                 {...field}

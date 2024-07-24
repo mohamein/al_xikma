@@ -14,8 +14,6 @@ interface ExpenseData {
   expenses: number;
   description: string;
   total: number;
-  feePercentage: number;
-  totalAmount: number;
 }
 const Expense = () => {
   const [data, setData] = useState<ExpenseData[]>([]);

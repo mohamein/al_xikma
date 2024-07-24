@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 export const employeeValidation = z.object({
   name: z.string().min(2, {
