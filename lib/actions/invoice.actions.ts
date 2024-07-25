@@ -29,3 +29,13 @@ export const getInVoice = async (id: any) => {
     console.log('Error while getting invoice', err);
   }
 };
+
+export const getAllInvoice = async () => {
+  try {
+    const invoice = await db.invoiceTable.findMany();
+    revalidatePath('/dashboard');
+    return invoice;
+  } catch (err) {
+    console.log('Error while getting invoice', err);
+  }
+};

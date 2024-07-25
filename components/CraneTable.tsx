@@ -16,7 +16,7 @@ const CraneTable = ({ data }: TableProps) => {
   const RenderTable = () => {
     return (
       <Table>
-        <TableHeader className="bg-[#395CA0]">
+        <TableHeader className="bg-red-600">
           <TableRow>
             <TableHead className="text-white">Customer:</TableHead>
             <TableHead className="text-white">Description:</TableHead>
@@ -25,7 +25,7 @@ const CraneTable = ({ data }: TableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((crane: any) => (
+          {data?.map((crane: any) => (
             <TableRow key={crane.id}>
               <TableCell>{crane.customer}</TableCell>
               <TableCell>{crane.description}</TableCell>

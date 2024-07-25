@@ -23,6 +23,7 @@ const ExpenseForm = () => {
       salary: 0,
       expenses: 0,
       description: '',
+      crane: '',
       total: 0,
     },
   });
@@ -36,6 +37,7 @@ const ExpenseForm = () => {
         salary: values.salary,
         expenses: values.expenses,
         description: values.description,
+        crane: values.crane,
         total: values.total,
       };
       const expenseData = await createExpense(expense);
@@ -96,6 +98,13 @@ const ExpenseForm = () => {
           placeholder="Enter Total..."
         />
 
+        <FormFields
+          control={form.control}
+          type="text"
+          name="crane"
+          label="Crane:"
+          placeholder="Enter Crane(kg)..."
+        />
         <FormFields
           control={form.control}
           type="text"

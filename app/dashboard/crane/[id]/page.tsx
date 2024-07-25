@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import CraneTable from '@/components/CraneTable';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
-import { getCrane1, getCrane2 } from '@/lib/actions/crane.actions';
+import { getCrane1, getCrane2, getCrane3 } from '@/lib/actions/crane.actions';
 interface Crane {
   id: string;
   customer: string;
@@ -26,9 +26,17 @@ const Crane = ({ params }: { params: any }) => {
       };
 
       fetchData();
-    } else {
+    } else if (params.id === '2') {
       const fetchData = async () => {
         const crane: any = await getCrane2();
+
+        setData(crane);
+      };
+
+      fetchData();
+    } else {
+      const fetchData = async () => {
+        const crane: any = await getCrane3();
 
         setData(crane);
       };

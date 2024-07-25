@@ -20,12 +20,13 @@ const DebtTable = ({ data, value }: any) => {
   return (
     <div className="bg-white shadow-md ">
       <Table>
-        <TableHeader className="bg-[#395CA0]">
+        <TableHeader className="bg-red-600">
           <TableRow>
             <TableHead className="text-white">Shidaal:</TableHead>
             <TableHead className="text-white">Shaxaad:</TableHead>
             <TableHead className="text-white">Salary:</TableHead>
             <TableHead className="text-white">Expenses:</TableHead>
+            <TableHead className="text-white">Crane:</TableHead>
             <TableHead className="text-white">Description:</TableHead>
             <TableHead className="text-white">Total:</TableHead>
             <TableHead className="text-white">Date:</TableHead>
@@ -36,7 +37,7 @@ const DebtTable = ({ data, value }: any) => {
             .filter((list: any) => {
               return value.toLowerCase() === ''
                 ? list
-                : list.description.toLowerCase().includes(value);
+                : list.crane.toLowerCase().includes(value);
             })
             .map((expense: any) => (
               <TableRow key={expense.id}>
@@ -44,6 +45,7 @@ const DebtTable = ({ data, value }: any) => {
                 <TableCell>{expense.shaxaad}</TableCell>
                 <TableCell>{expense.salary}</TableCell>
                 <TableCell>{expense.expenses}</TableCell>
+                <TableCell>{expense.crane}</TableCell>
                 <TableCell>{expense.description}</TableCell>
                 <TableCell>{expense.total}</TableCell>
                 <TableCell>{formatDate(expense.createdAt)}</TableCell>

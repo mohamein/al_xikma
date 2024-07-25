@@ -39,6 +39,24 @@ export const createCrane2 = async (data: CraneParams) => {
     console.error('An error occurred while creating a new crane:', err);
   }
 };
+export const createCrane3 = async (data: CraneParams) => {
+  try {
+    let crane;
+
+    crane = await db.largeElevator.create({
+      data: {
+        customer: data.customer,
+        description: data.description,
+        price: data.price,
+        receipt_no: data.receipt_no,
+      },
+    });
+    revalidatePath(`/dashboard/crane/3`);
+    return crane;
+  } catch (err) {
+    console.error('An error occurred while creating a new crane:', err);
+  }
+};
 
 export const getCrane1 = async () => {
   try {
@@ -55,6 +73,16 @@ export const getCrane2 = async () => {
     const crane = await db.middleElevator.findMany();
 
     revalidatePath(`/dashboard/crane/2`);
+    return crane;
+  } catch (err) {
+    console.error('An error occurred while creating a new crane:', err);
+  }
+};
+export const getCrane3 = async () => {
+  try {
+    const crane = await db.largeElevator.findMany();
+
+    revalidatePath(`/dashboard/crane/3`);
     return crane;
   } catch (err) {
     console.error('An error occurred while creating a new crane:', err);

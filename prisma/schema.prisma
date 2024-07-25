@@ -13,11 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id       String @id @default(uuid())
   username String
   email    String @unique
   password String
+  role     Role   @default(USER)
 
   createdAt DateTime @default(now())
 }
@@ -71,6 +77,17 @@ model MiddleElevator {
   updateAt  DateTime @updatedAt
 }
 
+model LargeElevator {
+  id          String @id @default(uuid())
+  customer    String
+  description String
+  price       Float
+  receipt_no  String
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
 // Final Table
 
 model FinalTable {
@@ -80,6 +97,7 @@ model FinalTable {
   salary      Float
   expenses    Float
   description String
+  crane       String
   total       Float
 
   createdAt DateTime @default(now())

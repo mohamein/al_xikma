@@ -8,7 +8,11 @@ import { craneValidation } from '@/lib/validation';
 import { useState } from 'react';
 import SubmitButton from '../SubmitButton';
 import { useRouter } from 'next/navigation';
-import { createCrane1, createCrane2 } from '@/lib/actions/crane.actions';
+import {
+  createCrane1,
+  createCrane2,
+  createCrane3,
+} from '@/lib/actions/crane.actions';
 
 const Crane = ({ id }: any) => {
   const router = useRouter();
@@ -39,8 +43,21 @@ const Crane = ({ id }: any) => {
         setIsLoading(false);
 
         console.log(data);
-      } else {
+      } else if (id === '2') {
         const data = await createCrane2({
+          customer: values.customer,
+          description: values.description,
+          price: values.price,
+          receipt_no: values.receipt_no,
+        });
+
+        setIsLoading(false);
+        if (data) {
+          router.push(`/dashboard/crane/${id}`);
+        }
+        console.log(data);
+      } else {
+        const data = await createCrane3({
           customer: values.customer,
           description: values.description,
           price: values.price,

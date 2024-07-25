@@ -11,8 +11,10 @@ import Card from '@/components/Card';
 import { FaUser, FaFileInvoice } from 'react-icons/fa';
 import { TbCarCrane } from 'react-icons/tb';
 import { getAllEmployee } from '@/lib/actions/employee.actions';
+import { getAllInvoice } from '@/lib/actions/invoice.actions';
 const Dashboard = async () => {
   const employee: any = await getAllEmployee();
+  const invoice: any = await getAllInvoice();
   return (
     <>
       {/* cards */}
@@ -39,8 +41,8 @@ const Dashboard = async () => {
             Icon={() => (
               <FaFileInvoice size={64} className="text-gray-300 opacity-30" />
             )}
-            length={0}
-            className="bg-[#1c5db1] "
+            length={invoice?.length}
+            className="bg-[#1c5db1]"
           />
         </div>
 
@@ -48,7 +50,7 @@ const Dashboard = async () => {
         <div className="flex  gap-4">
           <div className="bg-white shadow-md mx-2 flex-1">
             <Table>
-              <TableHeader className="bg-[#395CA0]">
+              <TableHeader className="bg-red-600">
                 <TableRow>
                   <TableHead className="text-white">FullName</TableHead>
                   <TableHead className="text-white">Email</TableHead>

@@ -14,6 +14,9 @@ import {
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { FaDownload } from 'react-icons/fa';
+import { BsFillTelephoneFill } from 'react-icons/bs';
+import { RiWhatsappFill } from 'react-icons/ri';
+import { MdOutlineMail } from 'react-icons/md';
 import { getInVoice } from '@/lib/actions/invoice.actions';
 
 const InvoiceDownload = ({ params }: any) => {
@@ -65,12 +68,12 @@ const InvoiceDownload = ({ params }: any) => {
         ref={contentRef}
         className="max-h-screen bg-white shadow-md w-[600px] mx-auto p-6"
       >
-        <div className="flex items-center justify-between mb-10 border-b border-black py-2">
+        <div className="flex items-center justify-between mb-6 border-b border-black py-2">
           <h1 className="text-3xl text-slate-800 font-bold">Invoice</h1>
 
           <Image
             src="/images/logo.png"
-            className="object-contain"
+            className="object-contain w-16"
             alt="logo"
             width={80}
             height={80}
@@ -79,11 +82,11 @@ const InvoiceDownload = ({ params }: any) => {
 
         {/* Invoice Info */}
 
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-[#222] text-xl font-semibold">Invoice To:</h2>
             <h3 className="text-base text-slate-700 font-medium">
-              Company Name
+              {invoice?.customer}
             </h3>
           </div>
           <div className="flex  flex-col">
@@ -91,18 +94,20 @@ const InvoiceDownload = ({ params }: any) => {
               <h3 className="text-slate-700 text-base font-semibold mr-4">
                 Invoice#
               </h3>
-              <p className="text-gray-400 text-[15px] font-normal">A109</p>
+              <p className="text-gray-400 text-[15px] font-normal">
+                {invoice?.receipt_no}
+              </p>
             </div>
             <div className="flex  gap-4">
               <h3 className="text-slate-700 text-base font-semibold">Date:</h3>
               <p className="text-gray-400 text-[15px] font-normal">
-                01/07/2024
+                {formateDate(invoice?.createdAt)}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="mb-10">
+        <div className="mb-6">
           {/* Invoice Table */}
           <Table>
             <TableHeader>
@@ -115,15 +120,15 @@ const InvoiceDownload = ({ params }: any) => {
 
             <TableBody>
               <TableRow>
-                <TableCell>Qaadis Baabur</TableCell>
-                <TableCell>$700</TableCell>
-                <TableCell>$700</TableCell>
+                <TableCell>{invoice?.description}</TableCell>
+                <TableCell>${invoice?.price}</TableCell>
+                <TableCell>${invoice?.price}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-5">
           <h2 className="text-base text-slate-700 font-semibold">
             Thank You For Your Business
           </h2>
@@ -137,13 +142,54 @@ const InvoiceDownload = ({ params }: any) => {
                 <p className="text-slate-800 text-[15px] font-semibold">Tax:</p>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="font-medium">$700</span>
+                <span className="font-medium">${invoice?.price}</span>
                 <span className="font-medium">0.00%</span>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <p className="text-slate-800 text-[15px] font-semibold">Total:</p>
-              <span className="font-medium text-base">$700</span>
+              <span className="font-medium text-base">${invoice?.price}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Account Info */}
+        <div className="flex  gap-6">
+          <div>
+            <h3 className="text-slate-700 font-semibold">
+              Hargeisa,Somaliland
+            </h3>
+            <div className="flex flex-col mt-2 space-y-2">
+              <p className="flex items-center gap-1 text-slate-700 font-medium">
+                <BsFillTelephoneFill size={20} className="text-green-400" />
+                063-4888182
+              </p>
+              <p className="flex items-center gap-1 text-slate-700 font-medium">
+                <BsFillTelephoneFill size={20} className="text-green-400" />
+                065-4888182
+              </p>
+              <p className="flex items-center gap-1 text-slate-700 font-medium">
+                <RiWhatsappFill size={23} className="text-green-400" />
+                063-4888182
+              </p>
+            </div>
+
+            <p className="flex items-center gap-1 mt-2 text-slate-700 font-medium">
+              <MdOutlineMail size={23} className="text-green-400" />
+              alxikmacraneservice@gmail.com
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-slate-700 font-semibold">Dubai,UAE</h3>
+            <div className="flex flex-col space-y-4 mt-2">
+              <p className="flex items-center gap-1 text-slate-700 font-medium">
+                <BsFillTelephoneFill size={20} className="text-green-400" />
+                971559864477
+              </p>
+              <p className="flex items-center gap-1 text-slate-700 font-medium">
+                <BsFillTelephoneFill size={20} className="text-green-400" />
+                971555611267
+              </p>
             </div>
           </div>
         </div>

@@ -7,15 +7,21 @@ import { SiExpensify } from 'react-icons/si';
 import { TbCarCrane, TbReport } from 'react-icons/tb';
 const Sidebar = () => {
   return (
-    <div className="sticky top-0 left-0 bg-black h-screen w-[250px]">
-      <div className="flex flex-col gap-10 p-6">
+    <div className="sticky top-0 left-0 bg-yellow-300 h-screen w-[250px]">
+      <div className="flex flex-col gap-8 p-6">
         <div className="flex gap-2 items-center">
-          <Image src="/images/logo.png" alt="logo" width={80} height={80} />
-          <h2 className="text-white text-base font-semibold">Al-xikma</h2>
+          <Image
+            src="/images/logo.png"
+            alt="logo"
+            width={70}
+            height={70}
+            className="object-contain w-14"
+          />
+          <h2 className="text-red-700 text-xl font-semibold">Al-xikma</h2>
         </div>
 
-        <ul className="text-white flex flex-col space-y-4">
-          <span className="text-gray-200 text-sm font-medium">Main</span>
+        <ul className="text-red-700 font-semibold flex flex-col space-y-4">
+          <span className="text-red-500 text-sm font-medium">Main</span>
           <div className="flex flex-col space-y-6">
             <Link href="/dashboard" className="flex items-center gap-2">
               <FiHome size={20} />
@@ -34,11 +40,15 @@ const Sidebar = () => {
             </Link>
             <Link href="/dashboard/crane/1" className="flex items-center gap-2">
               <TbCarCrane size={23} />
-              Crane 1
+              Crane 25t
             </Link>
             <Link href="/dashboard/crane/2" className="flex items-center gap-2">
               <TbCarCrane size={23} />
-              Crane 2
+              Crane 50t
+            </Link>
+            <Link href="/dashboard/crane/3" className="flex items-center gap-2">
+              <TbCarCrane size={23} />
+              Crane 160t
             </Link>
             <Link className="flex items-center gap-2" href="/dashboard/expense">
               <SiExpensify size={20} />
@@ -46,8 +56,8 @@ const Sidebar = () => {
             </Link>
           </div>
         </ul>
-        <ul className="text-white flex flex-col space-y-3">
-          <span className="text-gray-200 text-sm font-medium">Other</span>
+        <ul className="text-red-700 font-semibold flex flex-col space-y-3">
+          <span className="text-red-500 text-sm font-medium">Other</span>
           <Link className="flex items-center gap-2" href="/dashboard/report">
             <TbReport size={20} />
             Report

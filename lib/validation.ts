@@ -39,7 +39,10 @@ export const expenseValidation = z.object({
   salary: z.number().int(),
   expenses: z.number().int(),
   description: z.string().min(2, {
-    message: 'employeeId must be at least 2 characters',
+    message: 'description must be at least 2 characters',
+  }),
+  crane: z.string().min(2, {
+    message: 'crane must be at least 2 characters',
   }),
   total: z.number().int(),
 });

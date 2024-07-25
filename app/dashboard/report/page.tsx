@@ -27,16 +27,6 @@ const DebtPage = () => {
     fetchData();
   }, []);
 
-  const handleFilter = (value: any) => {
-    const filterData: any = data.filter((item: any) => {
-      if (item.salary === value) {
-        setData(item);
-      }
-    });
-
-    return filterData;
-  };
-
   return (
     <div className="space-y-2">
       {/* Filter and Heading */}
