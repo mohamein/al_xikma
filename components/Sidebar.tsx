@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+
 import { FiHome } from 'react-icons/fi';
-import { FaUser, FaMoneyBillAlt } from 'react-icons/fa';
+import { FaUser, FaMoneyBillAlt, FaFileInvoice } from 'react-icons/fa';
 import { SiExpensify } from 'react-icons/si';
 import { TbCarCrane, TbReport } from 'react-icons/tb';
 const Sidebar = () => {
   return (
-    <div className="sticky top-0 left-0 bg-yellow-300 h-screen w-[250px]">
-      <div className="flex flex-col gap-8 p-6">
+    <div className="sticky top-0 left-0 bg-yellow-300  w-[250px]">
+      <div className="flex flex-col gap-8 p-6 h-screen">
         <div className="flex gap-2 items-center">
           <Image
             src="/images/logo.png"
@@ -20,7 +20,7 @@ const Sidebar = () => {
           <h2 className="text-red-700 text-xl font-semibold">Al-xikma</h2>
         </div>
 
-        <ul className="text-red-700 font-semibold flex flex-col space-y-4">
+        <ul className="text-red-700 font-semibold flex flex-col space-y-2">
           <span className="text-red-500 text-sm font-medium">Main</span>
           <div className="flex flex-col space-y-6">
             <Link href="/dashboard" className="flex items-center gap-2">
@@ -53,6 +53,10 @@ const Sidebar = () => {
             <Link className="flex items-center gap-2" href="/dashboard/expense">
               <SiExpensify size={20} />
               Expenses
+            </Link>
+            <Link className="flex items-center gap-2" href="/dashboard/invoice">
+              <FaFileInvoice size={20} />
+              Invoices
             </Link>
           </div>
         </ul>

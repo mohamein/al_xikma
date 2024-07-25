@@ -13,7 +13,7 @@ const Header = () => {
         <div className="flex gap-4 items-center">
           <Link
             className="bg-transparent border border-amber-500 p-2 text-amber-600 text-base font-semibold rounded-md"
-            href="/dashboard/invoice"
+            href="/dashboard/invoice/add"
           >
             Add Invoice
           </Link>

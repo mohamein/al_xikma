@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table';
 import Card from '@/components/Card';
 import { FaUser, FaFileInvoice } from 'react-icons/fa';
-import { TbCarCrane } from 'react-icons/tb';
+import { PiCraneBold } from 'react-icons/pi';
 import { getAllEmployee } from '@/lib/actions/employee.actions';
 import { getAllInvoice } from '@/lib/actions/invoice.actions';
 const Dashboard = async () => {
@@ -26,15 +26,15 @@ const Dashboard = async () => {
               <FaUser size={64} className="text-gray-300 opacity-30" />
             )}
             length={employee?.length}
-            className="bg-[#c64765]"
+            className="bg-[#dd6480]"
           />
           <Card
             title="Crane"
             Icon={() => (
-              <TbCarCrane size={64} className="text-gray-300 opacity-30" />
+              <PiCraneBold size={68} className="text-gray-300 opacity-30" />
             )}
             length={2}
-            className="bg-[#13585f] "
+            className="bg-[#1a8692]"
           />
           <Card
             title="Invoices"
@@ -42,7 +42,7 @@ const Dashboard = async () => {
               <FaFileInvoice size={64} className="text-gray-300 opacity-30" />
             )}
             length={invoice?.length}
-            className="bg-[#1c5db1]"
+            className="bg-[#2a6fca]"
           />
         </div>
 
