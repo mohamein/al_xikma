@@ -22,6 +22,7 @@ const DebtTable = ({ data, value }: any) => {
       <Table>
         <TableHeader className="bg-red-600">
           <TableRow>
+            <TableHead className="text-white">Dakhali:</TableHead>
             <TableHead className="text-white">Shidaal:</TableHead>
             <TableHead className="text-white">Shaxaad:</TableHead>
             <TableHead className="text-white">Salary:</TableHead>
@@ -29,6 +30,8 @@ const DebtTable = ({ data, value }: any) => {
             <TableHead className="text-white">Crane:</TableHead>
             <TableHead className="text-white">Description:</TableHead>
             <TableHead className="text-white">Total:</TableHead>
+            <TableHead className="text-white">Khidmad:</TableHead>
+            <TableHead className="text-white">Net Total:</TableHead>
             <TableHead className="text-white">Date:</TableHead>
           </TableRow>
         </TableHeader>
@@ -41,6 +44,7 @@ const DebtTable = ({ data, value }: any) => {
             })
             .map((expense: any) => (
               <TableRow key={expense.id}>
+                <TableCell>{expense.amount}</TableCell>
                 <TableCell>{expense.fuel}</TableCell>
                 <TableCell>{expense.shaxaad}</TableCell>
                 <TableCell>{expense.salary}</TableCell>
@@ -48,6 +52,8 @@ const DebtTable = ({ data, value }: any) => {
                 <TableCell>{expense.crane}</TableCell>
                 <TableCell>{expense.description}</TableCell>
                 <TableCell>{expense.total}</TableCell>
+                <TableCell>{expense.feePercentage}</TableCell>
+                <TableCell>{expense.netIncome}</TableCell>
                 <TableCell>{formatDate(expense.createdAt)}</TableCell>
               </TableRow>
             ))}

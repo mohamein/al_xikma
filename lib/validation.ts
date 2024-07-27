@@ -44,5 +44,18 @@ export const expenseValidation = z.object({
   crane: z.string().min(2, {
     message: 'crane must be at least 2 characters',
   }),
+  feePercentage: z.number().int(),
+  amount: z.number().int(),
   total: z.number().int(),
+  netIncome: z.number().int(),
+});
+export const expense1Validation = z.object({
+  total: z.number().int(),
+  oil: z.number().int(),
+  waterLaydh: z.number().int(),
+  internet: z.number().int(),
+  dayactir: z.number().int(),
+  spareParts: z.number().int(),
+  smallExpense: z.number().int(),
+  netTotal: z.number().int(),
 });

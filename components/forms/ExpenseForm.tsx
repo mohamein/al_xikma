@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
-import { createExpense } from '@/lib/actions/expense.actions';
+import { createExpense1 } from '@/lib/actions/expense.actions';
 import { expenseValidation } from '@/lib/validation';
 
 import SubmitButton from '../SubmitButton';
@@ -24,23 +24,41 @@ const ExpenseForm = () => {
       expenses: 0,
       description: '',
       crane: '',
+      amount: 0,
+      feePercentage: 0,
       total: 0,
+      netIncome: 0,
     },
   });
 
   async function onSubmit(values: z.infer<typeof expenseValidation>) {
     setIsLoading(true);
     try {
-      const expense = {
-        fuel: values.fuel,
-        shaxaad: values.shaxaad,
-        salary: values.salary,
-        expenses: values.expenses,
-        description: values.description,
-        crane: values.crane,
-        total: values.total,
-      };
-      const expenseData = await createExpense(expense);
+      const {
+        fuel,
+        shaxaad,
+        salary,
+        expenses,
+        description,
+        crane,
+        amount,
+        feePercentage,
+      } = values;
+      const total1 = amount - (fuel + shaxaad + expenses + salary);
+      const netAmount = total1 - feePercentage;
+
+      const expenseData = await createExpense1({
+        fuel: fuel,
+        shaxaad: shaxaad,
+        salary: salary,
+        expenses: expenses,
+        description: description,
+        crane: crane,
+        amount: amount,
+        total: total1,
+        feePercentage: feePercentage,
+        netIncome: netAmount,
+      });
 
       if (expenseData) {
         router.push('/dashboard/expense');
@@ -56,7 +74,14 @@ const ExpenseForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-2 w-full">
+        <FormFields
+          control={form.control}
+          type="number"
+          name="amount"
+          label="Dakhali:"
+          placeholder="Dakhaliga Soo Galay..."
+        />
+        <div className="flex gap-2 w-[400px]">
           <FormFields
             control={form.control}
             type="number"
@@ -73,7 +98,7 @@ const ExpenseForm = () => {
           />
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-[400px]">
           <FormFields
             control={form.control}
             type="number"
@@ -92,25 +117,24 @@ const ExpenseForm = () => {
 
         <FormFields
           control={form.control}
-          type="number"
-          name="total"
-          label="Total:"
-          placeholder="Enter Total..."
+          type="text"
+          name="description"
+          label="Description:"
+          placeholder="Enter description..."
         />
-
         <FormFields
           control={form.control}
           type="text"
           name="crane"
           label="Crane:"
-          placeholder="Enter Crane(kg)..."
+          placeholder="Enter Crane(t)..."
         />
         <FormFields
           control={form.control}
-          type="text"
-          name="description"
-          label="Description:"
-          placeholder="Enter description..."
+          type="number"
+          name="feePercentage"
+          label="Khidmada:"
+          placeholder="Khidmada..."
         />
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>

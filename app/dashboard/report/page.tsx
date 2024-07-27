@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import ReportTable from '@/components/ReportTable';
 import Filter from '@/components/Filter';
-import { getAllExpenses } from '@/lib/actions/expense.actions';
+import { getAllExpenses1 } from '@/lib/actions/expense.actions';
 interface ExpenseData {
   id: string;
   fuel: number;
@@ -18,7 +18,7 @@ const DebtPage = () => {
   const [value, setValue] = useState('');
   useEffect(() => {
     const fetchData = async () => {
-      const expense: any = await getAllExpenses();
+      const expense: any = await getAllExpenses1();
 
       if (expense) {
         setData(expense);

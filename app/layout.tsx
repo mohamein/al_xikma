@@ -3,6 +3,7 @@ import { Roboto_Mono } from 'next/font/google';
 
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { getServerSession } from 'next-auth';
 
 const roboto = Roboto_Mono({
   subsets: ['latin'],
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   description: 'finance app for Alxikma',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

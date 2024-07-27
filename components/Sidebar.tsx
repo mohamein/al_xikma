@@ -52,7 +52,14 @@ const Sidebar = () => {
             </Link>
             <Link className="flex items-center gap-2" href="/dashboard/expense">
               <SiExpensify size={20} />
-              Expenses
+              Expenses 1
+            </Link>
+            <Link
+              className="flex items-center gap-2"
+              href="/dashboard/expense1"
+            >
+              <SiExpensify size={20} />
+              Expenses 2
             </Link>
             <Link className="flex items-center gap-2" href="/dashboard/invoice">
               <FaFileInvoice size={20} />

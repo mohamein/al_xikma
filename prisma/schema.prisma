@@ -90,15 +90,34 @@ model LargeElevator {
 
 // Final Table
 
-model FinalTable {
-  id          String @id @default(uuid())
-  fuel        Float
-  shaxaad     Float
-  salary      Float
-  expenses    Float
-  description String
-  crane       String
-  total       Float
+model Expense1 {
+  id            String @id @default(uuid())
+  fuel          Float
+  shaxaad       Float
+  salary        Float
+  expenses      Float
+  description   String
+  crane         String
+  // Total laso gelinayo
+  amount        Float
+  total         Float
+  feePercentage Float
+  netIncome     Float
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Expense2 {
+  id           String @id @default(uuid())
+  total        Float
+  oil          Float
+  waterLayadh  Float
+  internet     Float
+  dayactir     Float
+  spareParts   Float
+  smallExpense Float
+  netTotal     Float
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt

@@ -4,7 +4,7 @@ import { FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
 
 import ExpenseTable from '@/components/ExpenseTable';
-import { getAllExpenses } from '@/lib/actions/expense.actions';
+import { getAllExpenses1 } from '@/lib/actions/expense.actions';
 
 interface ExpenseData {
   id: string;
@@ -20,7 +20,7 @@ const Expense = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const expense: any = await getAllExpenses();
+      const expense: any = await getAllExpenses1();
 
       if (expense) {
         setData(expense);
