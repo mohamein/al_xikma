@@ -32,17 +32,14 @@ const Crane = ({ id }: any) => {
     setIsLoading(true);
 
     try {
-      const { customer, description, price } = values;
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      const random = Math.floor(Math.random() * characters.length);
+      const { customer, description, price, receipt_no } = values;
 
-      console.log(random);
       if (id === '1') {
         const data = await createCrane1({
           customer: customer,
           description: description,
           price: price,
-          receipt_no: random.toString(),
+          receipt_no: receipt_no,
         });
         if (data) {
           router.push(`/dashboard/crane/${id}`);
@@ -51,10 +48,10 @@ const Crane = ({ id }: any) => {
         console.log(data);
       } else if (id === '2') {
         const data = await createCrane2({
-          customer: values.customer,
-          description: values.description,
-          price: values.price,
-          receipt_no: randomReceipt,
+          customer: customer,
+          description: description,
+          price: price,
+          receipt_no: receipt_no,
         });
 
         setIsLoading(false);
@@ -64,10 +61,10 @@ const Crane = ({ id }: any) => {
         console.log(data);
       } else {
         const data = await createCrane3({
-          customer: values.customer,
-          description: values.description,
-          price: values.price,
-          receipt_no: randomReceipt,
+          customer: customer,
+          description: description,
+          price: price,
+          receipt_no: receipt_no,
         });
 
         setIsLoading(false);
@@ -105,13 +102,13 @@ const Crane = ({ id }: any) => {
           label="Price:"
           placeholder="Enter Price..."
         />
-        {/* <FormFields
+        <FormFields
           control={form.control}
           type="text"
           name="receipt_no"
           label="Receipt No:"
           placeholder="Enter Receipt No...."
-        /> */}
+        />
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
