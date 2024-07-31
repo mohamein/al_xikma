@@ -5,11 +5,7 @@ import { revalidatePath } from 'next/cache';
 export const createSalary = async (data: SalaryParams) => {
   try {
     const salary = await db.salary.create({
-      data: {
-        amount: data.amount,
-        horumarin: data.horumarin,
-        employee: data.employee,
-      },
+      data: data,
     });
     revalidatePath('/dashboard/salary');
 
@@ -21,7 +17,11 @@ export const createSalary = async (data: SalaryParams) => {
 
 export const getAllSalary = async () => {
   try {
-    const salary = await db.salary.findMany();
+    const salary = await db.salary.findMany({
+      include: {
+        employee: true,
+      },
+    });
 
     revalidatePath('/dashboard/salary');
     return salary;

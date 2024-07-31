@@ -5,14 +5,8 @@ import SalaryTable from '@/components/SalaryTable';
 import { getAllSalary } from '@/lib/actions/salary.actions';
 import { FaPlusCircle } from 'react-icons/fa';
 
-interface SalaryProps {
-  id: string;
-  customer: string;
-  amount: number;
-  horumarin: number;
-}
 const Salary = () => {
-  const [data, setData] = useState<SalaryProps[]>([]);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +18,8 @@ const Salary = () => {
     };
     fetchData();
   }, []);
+
+  console.log(data);
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-slate-800 font-semibold text-2xl">Salary</h2>

@@ -2,24 +2,40 @@
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { salaryValidation } from '@/lib/validation';
 import SubmitButton from '../SubmitButton';
 import FormFields from '@/components/FormFields';
 
 import { createSalary } from '@/lib/actions/salary.actions';
+import { getAllEmployee } from '@/lib/actions/employee.actions';
 
 const SalaryForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [employeeId, setEmployeeId] = useState('');
+  const [employee, setEmployee] = useState<any>([]);
 
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      const employeData = await getAllEmployee();
+
+      setEmployee(employeData);
+    };
+    fetchEmployee();
+  }, []);
   const form = useForm<z.infer<typeof salaryValidation>>({
     resolver: zodResolver(salaryValidation),
     defaultValues: {
-      employee: '',
       amount: 0,
       horumarin: 0,
     },
@@ -28,13 +44,14 @@ const SalaryForm = () => {
   async function onSubmit(values: z.infer<typeof salaryValidation>) {
     setIsLoading(true);
     try {
-      const salary = {
-        employee: values.employee,
-        amount: values.amount,
-        horumarin: values.horumarin,
-      };
-
-      const salaryData = await createSalary(salary);
+      const { amount, horumarin } = values;
+      const netTotal = amount - horumarin;
+      const salaryData = await createSalary({
+        employeeId: employeeId,
+        amount: amount,
+        horumarin: horumarin,
+        total: netTotal,
+      });
       if (salaryData) {
         console.log(salaryData);
 
@@ -46,16 +63,25 @@ const SalaryForm = () => {
     }
     setIsLoading(false);
   }
+
+  const handleChange = (id: string) => {
+    setEmployeeId(id);
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormFields
-          control={form.control}
-          type="text"
-          name="employee"
-          label="Employee:"
-          placeholder="Employee Name..."
-        />
+        <Select onValueChange={handleChange} defaultValue={employeeId}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select Employee" />
+          </SelectTrigger>
+          <SelectContent>
+            {employee?.map((list: any) => (
+              <SelectItem key={list.id} value={list.id}>
+                {list.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <FormFields
           control={form.control}
           type="number"

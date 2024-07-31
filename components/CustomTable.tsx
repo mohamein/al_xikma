@@ -29,14 +29,14 @@ const CustomTable = ({
   return (
     <div className="bg-white shadow-md mx-2">
       <Table>
-        <TableHeader className="bg-red-600">
+        <TableHeader>
           <TableRow>
-            <TableHead className="text-white">{fullName}</TableHead>
-            <TableHead className="text-white">{email}</TableHead>
-            <TableHead className="text-white">{phone}</TableHead>
-            <TableHead className="text-white">{address}</TableHead>
-            <TableHead className="text-white">Date:</TableHead>
-            <TableHead className="text-white">actions</TableHead>
+            <TableHead className="text-[#5874c7]">{fullName}</TableHead>
+            <TableHead className="text-[#5874c7]">{email}</TableHead>
+            <TableHead className="text-[#5874c7]">{phone}</TableHead>
+            <TableHead className="text-[#5874c7]">{address}</TableHead>
+            <TableHead className="text-[#5874c7]">Date:</TableHead>
+            <TableHead className="text-[#5874c7]">actions</TableHead>
           </TableRow>
         </TableHeader>
 

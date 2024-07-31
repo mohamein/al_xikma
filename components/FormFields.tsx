@@ -33,7 +33,7 @@ const FormFields = (props: CustomProps) => {
             {type === 'number' ? (
               <Input
                 type={type!}
-                min="5"
+                min="0"
                 max="9999"
                 pattern="[0-9]*"
                 placeholder={placeholder!}

@@ -15,9 +15,6 @@ export const employeeValidation = z.object({
   }),
 });
 export const salaryValidation = z.object({
-  employee: z.string().min(2, {
-    message: 'employeeId must be at least 2 characters',
-  }),
   amount: z.number().int(),
   horumarin: z.number().int(),
 });

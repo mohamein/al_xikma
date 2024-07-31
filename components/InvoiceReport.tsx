@@ -69,7 +69,7 @@ const InvoiceReport = () => {
           >
             <CalendarIcon className="mr-2 h-6 w-6" />
             {date ? (
-              format(date, 'PPP')
+              format(date, 'MMM y')
             ) : (
               <span className="font-medium">Pick a date</span>
             )}

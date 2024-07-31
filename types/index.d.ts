@@ -6,9 +6,10 @@ declare interface EmployeeParams {
 }
 
 declare interface SalaryParams {
-  employee: string;
+  employeeId: string;
   amount: number;
   horumarin: number;
+  total: number;
 }
 
 declare interface CraneParams {
