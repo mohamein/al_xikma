@@ -36,7 +36,7 @@ const Dashboard = () => {
           <Card className="bg-white">
             <div className="bg-[#F4F7FE] w-[56px] h-[56px] rounded-full flex items-center justify-center">
               <Image
-                src="/assets/icon.svg"
+                src="/assets/earning.svg"
                 alt="money"
                 width={40}
                 height={40}
