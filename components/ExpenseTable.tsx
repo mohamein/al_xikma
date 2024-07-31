@@ -22,19 +22,19 @@ const ExpenseTable = ({ data }: ExpenseProps) => {
   return (
     <div className="bg-white shadow-md">
       <Table>
-        <TableHeader className="bg-red-600">
+        <TableHeader>
           <TableRow>
-            <TableHead className="text-white">Dakhali:</TableHead>
-            <TableHead className="text-white">Shidaal:</TableHead>
-            <TableHead className="text-white">Shaxaad:</TableHead>
-            <TableHead className="text-white">Salary:</TableHead>
-            <TableHead className="text-white">Expenses:</TableHead>
-            <TableHead className="text-white">Crane:</TableHead>
-            <TableHead className="text-white">Description:</TableHead>
-            <TableHead className="text-white">Total:</TableHead>
-            <TableHead className="text-white">Khidmada:</TableHead>
-            <TableHead className="text-white">Net Total:</TableHead>
-            <TableHead className="text-white">Date:</TableHead>
+            <TableHead className="text-[#5874c7]">Dakhali:</TableHead>
+            <TableHead className="text-[#5874c7]">Shidaal:</TableHead>
+            <TableHead className="text-[#5874c7]">Shaxaad:</TableHead>
+            <TableHead className="text-[#5874c7]">Salary:</TableHead>
+            <TableHead className="text-[#5874c7]">Expenses:</TableHead>
+            <TableHead className="text-[#5874c7]">Crane:</TableHead>
+            <TableHead className="text-[#5874c7]">Description:</TableHead>
+            <TableHead className="text-[#5874c7]">Total:</TableHead>
+            <TableHead className="text-[#5874c7]">Khidmada:</TableHead>
+            <TableHead className="text-[#5874c7]">Net Total:</TableHead>
+            <TableHead className="text-[#5874c7]">Date:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

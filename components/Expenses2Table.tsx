@@ -20,17 +20,17 @@ const Expenses2Table = ({ data }: any) => {
   return (
     <div className="bg-white shadow-md">
       <Table>
-        <TableHeader className="bg-red-600">
+        <TableHeader>
           <TableRow>
-            <TableHead className="text-white">Total Dakhli:</TableHead>
-            <TableHead className="text-white">Saliid:</TableHead>
-            <TableHead className="text-white">Biyo Iyo Laydh:</TableHead>
-            <TableHead className="text-white">Internet:</TableHead>
-            <TableHead className="text-white">Dayactir:</TableHead>
-            <TableHead className="text-white">Spare Parts:</TableHead>
-            <TableHead className="text-white">Kharash Yar:</TableHead>
-            <TableHead className="text-white">Net Total:</TableHead>
-            <TableHead className="text-white">Date:</TableHead>
+            <TableHead className="text-[#5874c7]">Total Dakhli:</TableHead>
+            <TableHead className="text-[#5874c7]">Saliid:</TableHead>
+            <TableHead className="text-[#5874c7]">Biyo Iyo Laydh:</TableHead>
+            <TableHead className="text-[#5874c7]">Internet:</TableHead>
+            <TableHead className="text-[#5874c7]">Dayactir:</TableHead>
+            <TableHead className="text-[#5874c7]">Spare Parts:</TableHead>
+            <TableHead className="text-[#5874c7]">Kharash Yar:</TableHead>
+            <TableHead className="text-[#5874c7]">Net Total:</TableHead>
+            <TableHead className="text-[#5874c7]">Date:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -25,7 +25,7 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'min-h-screen bg-[#fafafa] overflow-x-hidden',
+          'min-h-screen bg-[#F4F7FE] overflow-x-hidden',
           roboto.variable
         )}
       >

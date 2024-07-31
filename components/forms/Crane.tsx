@@ -17,6 +17,7 @@ import {
 const Crane = ({ id }: any) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof craneValidation>>({
     resolver: zodResolver(craneValidation),
     defaultValues: {
@@ -26,29 +27,34 @@ const Crane = ({ id }: any) => {
       receipt_no: '',
     },
   });
+
   async function onSubmit(values: z.infer<typeof craneValidation>) {
     setIsLoading(true);
+
     try {
+      const { customer, description, price } = values;
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      const random = Math.floor(Math.random() * characters.length);
+
+      console.log(random);
       if (id === '1') {
         const data = await createCrane1({
-          customer: values.customer,
-          description: values.description,
-          price: values.price,
-          receipt_no: values.receipt_no,
+          customer: customer,
+          description: description,
+          price: price,
+          receipt_no: random.toString(),
         });
-
         if (data) {
           router.push(`/dashboard/crane/${id}`);
         }
         setIsLoading(false);
-
         console.log(data);
       } else if (id === '2') {
         const data = await createCrane2({
           customer: values.customer,
           description: values.description,
           price: values.price,
-          receipt_no: values.receipt_no,
+          receipt_no: randomReceipt,
         });
 
         setIsLoading(false);
@@ -61,7 +67,7 @@ const Crane = ({ id }: any) => {
           customer: values.customer,
           description: values.description,
           price: values.price,
-          receipt_no: values.receipt_no,
+          receipt_no: randomReceipt,
         });
 
         setIsLoading(false);
@@ -99,13 +105,13 @@ const Crane = ({ id }: any) => {
           label="Price:"
           placeholder="Enter Price..."
         />
-        <FormFields
+        {/* <FormFields
           control={form.control}
           type="text"
           name="receipt_no"
-          label="Receipt_No:"
-          placeholder="Enter Receipt No..."
-        />
+          label="Receipt No:"
+          placeholder="Enter Receipt No...."
+        /> */}
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>

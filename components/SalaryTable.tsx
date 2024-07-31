@@ -21,7 +21,7 @@ const SalaryTable = ({ data }: any) => {
   return (
     <div className="bg-white shadow-md">
       <Table>
-        <TableHeader className="bg-red-600">
+        <TableHeader>
           <TableRow>
             <TableHead className="text-white">Employee:</TableHead>
             <TableHead className="text-white">Mushaharka:</TableHead>

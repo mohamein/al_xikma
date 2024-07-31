@@ -23,9 +23,6 @@ const Filter = ({ value, setValue }: FilterProps) => {
     setValue(selected);
   };
 
-  const handleDateSelect = (date: string) => {
-    console.log(date);
-  };
   return (
     <div className="flex gap-4 items-center">
       <div className="w-[300px]">

@@ -123,6 +123,16 @@ model Expense2 {
   updateAt  DateTime @updatedAt
 }
 
+model FinalTable {
+  id        String   @id @default(uuid())
+  crane1    Float
+  crane2    Float
+  crane3    Float
+  total     Float
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
 model InvoiceTable {
   id          String @id @default(uuid())
   customer    String

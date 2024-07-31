@@ -2,19 +2,36 @@
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { createExpense1 } from '@/lib/actions/expense.actions';
 import { expenseValidation } from '@/lib/validation';
-
+import { getAllFinal } from '@/lib/actions/final.actions';
 import SubmitButton from '../SubmitButton';
 import FormFields from '@/components/FormFields';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 const ExpenseForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [income, setIncome] = useState<any>([]);
+  useEffect(() => {
+    const fetchExpense = async () => {
+      const expenseData: any = await getAllFinal();
+      let temp: number = 0;
+      for (let i = 0; i < expenseData.length; i++) {
+        temp += parseFloat(expenseData[i].total);
+      }
 
+      setIncome(temp);
+    };
+
+    fetchExpense();
+  }, []);
+
+  console.log(income);
   const form = useForm<z.infer<typeof expenseValidation>>({
     resolver: zodResolver(expenseValidation),
     defaultValues: {
@@ -24,7 +41,6 @@ const ExpenseForm = () => {
       expenses: 0,
       description: '',
       crane: '',
-      amount: 0,
       feePercentage: 0,
       total: 0,
       netIncome: 0,
@@ -41,10 +57,9 @@ const ExpenseForm = () => {
         expenses,
         description,
         crane,
-        amount,
         feePercentage,
       } = values;
-      const total1 = amount - (fuel + shaxaad + expenses + salary);
+      const total1 = income - (fuel + shaxaad + expenses + salary);
       const netAmount = total1 - feePercentage;
 
       const expenseData = await createExpense1({
@@ -54,7 +69,7 @@ const ExpenseForm = () => {
         expenses: expenses,
         description: description,
         crane: crane,
-        amount: amount,
+        amount: income,
         total: total1,
         feePercentage: feePercentage,
         netIncome: netAmount,
@@ -74,13 +89,10 @@ const ExpenseForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormFields
-          control={form.control}
-          type="number"
-          name="amount"
-          label="Dakhali:"
-          placeholder="Dakhaliga Soo Galay..."
-        />
+        <div>
+          <Label>Dakhali:</Label>
+          <Input type="number" readOnly value={income} />
+        </div>
         <div className="flex gap-2 w-[400px]">
           <FormFields
             control={form.control}

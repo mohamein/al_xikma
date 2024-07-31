@@ -2,22 +2,37 @@
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { expense1Validation } from '@/lib/validation';
 import FormFields from '../FormFields';
 import { createExpense2 } from '@/lib/actions/expense.actions';
+import { getAllExpenses1 } from '@/lib/actions/expense.actions';
 import SubmitButton from '../SubmitButton';
-
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 const Expenses1Form = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [income, setIncome] = useState<any>([]);
 
+  useEffect(() => {
+    const fetchExpense = async () => {
+      const expenseData: any = await getAllExpenses1();
+      let temp: number = 0;
+      for (let i = 0; i < expenseData.length; i++) {
+        temp += parseFloat(expenseData[i].netIncome);
+      }
+
+      setIncome(temp);
+    };
+
+    fetchExpense();
+  }, []);
   const form = useForm<z.infer<typeof expense1Validation>>({
     resolver: zodResolver(expense1Validation),
     defaultValues: {
-      total: 0,
       oil: 0,
       waterLaydh: 0,
       internet: 0,
@@ -32,20 +47,13 @@ const Expenses1Form = () => {
     setIsLoading(true);
 
     try {
-      const {
-        total,
-        oil,
-        waterLaydh,
-        internet,
-        dayactir,
-        spareParts,
-        smallExpense,
-      } = values;
+      const { oil, waterLaydh, internet, dayactir, spareParts, smallExpense } =
+        values;
       const netAmount =
-        total - (oil + waterLaydh + dayactir + spareParts + smallExpense);
+        income - (oil + waterLaydh + dayactir + spareParts + smallExpense);
 
       const expense = await createExpense2({
-        total: total,
+        total: income,
         oil: oil,
         waterLayadh: waterLaydh,
         internet: internet,
@@ -66,13 +74,10 @@ const Expenses1Form = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormFields
-          control={form.control}
-          type="number"
-          name="total"
-          label="Dakhli"
-          placeholder="Dakhliga"
-        />
+        <div>
+          <Label>Dakhali:</Label>
+          <Input type="number" readOnly value={income} />
+        </div>
         <FormFields
           control={form.control}
           type="number"
