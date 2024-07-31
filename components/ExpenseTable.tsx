@@ -29,7 +29,6 @@ const ExpenseTable = ({ data }: ExpenseProps) => {
             <TableHead className="text-[#5874c7]">Shaxaad:</TableHead>
             <TableHead className="text-[#5874c7]">Salary:</TableHead>
             <TableHead className="text-[#5874c7]">Expenses:</TableHead>
-            <TableHead className="text-[#5874c7]">Crane:</TableHead>
             <TableHead className="text-[#5874c7]">Description:</TableHead>
             <TableHead className="text-[#5874c7]">Total:</TableHead>
             <TableHead className="text-[#5874c7]">Khidmada:</TableHead>
@@ -45,7 +44,6 @@ const ExpenseTable = ({ data }: ExpenseProps) => {
               <TableCell>{expense.shaxaad}</TableCell>
               <TableCell>{expense.salary}</TableCell>
               <TableCell>{expense.expenses}</TableCell>
-              <TableCell>{expense.crane}</TableCell>
               <TableCell>{expense.description}</TableCell>
               <TableCell>{expense.total}</TableCell>
               <TableCell>{expense.feePercentage}</TableCell>

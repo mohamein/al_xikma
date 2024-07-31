@@ -18,11 +18,13 @@ import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 import { getAllInvoice } from '@/lib/actions/invoice.actions';
 const InvoiceReport = () => {
   const [date, setDate] = useState<Date>();
   const [data, setData] = useState<any>([]);
+  const [search, setSearch] = useState('');
 
   const formatDate = (date: Date) => {
     const dateOptions: any = {
@@ -46,6 +48,7 @@ const InvoiceReport = () => {
   }, []);
   const handleFilterDate = (reportData: any, selectedDate: any) => {
     if (!selectedDate) return data;
+
     return reportData?.filter((report: any) => {
       const reportDate = new Date(report.createdAt);
       return (
@@ -54,37 +57,60 @@ const InvoiceReport = () => {
     });
   };
 
-  const filteredData = handleFilterDate(data, date);
+  const filterBySearch = (reportData: any, searchValue: string) => {
+    if (!searchValue) return data;
+    return reportData?.filter((report: any) => {
+      return searchValue.toLowerCase() === ''
+        ? report
+        : report.customer.toLowerCase().includes(searchValue);
+    });
+  };
 
+  let filteredData;
+  if (date) {
+    filteredData = handleFilterDate(data, date);
+  } else {
+    filteredData = filterBySearch(data, search);
+  }
   return (
     <div className="flex flex-col mt-10 gap-4">
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant={'outline'}
-            className={cn(
-              'w-[280px] justify-start text-left font-normal',
-              !date && 'text-[#5874c7]'
-            )}
-          >
-            <CalendarIcon className="mr-2 h-6 w-6" />
-            {date ? (
-              format(date, 'MMM y')
-            ) : (
-              <span className="font-medium">Pick a date</span>
-            )}
-          </Button>
-        </PopoverTrigger>
+      <div className="flex gap-4 items-center">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[280px] justify-start text-left font-normal',
+                !date && 'text-[#5874c7]'
+              )}
+            >
+              <CalendarIcon className="mr-2 h-6 w-6" />
+              {date ? (
+                format(date, 'MMM y')
+              ) : (
+                <span className="font-medium">Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
 
-        <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            initialFocus
-          />
-        </PopoverContent>
-      </Popover>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+
+        <Input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-[300px]"
+        />
+      </div>
 
       <div className="bg-white shadow-md mr-2">
         <Table>

@@ -98,7 +98,6 @@ model Expense1 {
   salary        Float
   expenses      Float
   description   String
-  crane         String
   // Total laso gelinayo
   amount        Float
   total         Float
@@ -118,6 +117,7 @@ model Expense2 {
   dayactir     Float
   spareParts   Float
   smallExpense Float
+  salary       Float
   netTotal     Float
 
   createdAt DateTime @default(now())

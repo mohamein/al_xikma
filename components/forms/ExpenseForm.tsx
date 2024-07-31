@@ -40,7 +40,6 @@ const ExpenseForm = () => {
       salary: 0,
       expenses: 0,
       description: '',
-      crane: '',
       feePercentage: 0,
       total: 0,
       netIncome: 0,
@@ -50,15 +49,8 @@ const ExpenseForm = () => {
   async function onSubmit(values: z.infer<typeof expenseValidation>) {
     setIsLoading(true);
     try {
-      const {
-        fuel,
-        shaxaad,
-        salary,
-        expenses,
-        description,
-        crane,
-        feePercentage,
-      } = values;
+      const { fuel, shaxaad, salary, expenses, description, feePercentage } =
+        values;
       const total1 = income - (fuel + shaxaad + expenses + salary);
       const netAmount = total1 - feePercentage;
 
@@ -68,7 +60,6 @@ const ExpenseForm = () => {
         salary: salary,
         expenses: expenses,
         description: description,
-        crane: crane,
         amount: income,
         total: total1,
         feePercentage: feePercentage,
@@ -133,13 +124,6 @@ const ExpenseForm = () => {
           name="description"
           label="Description:"
           placeholder="Enter description..."
-        />
-        <FormFields
-          control={form.control}
-          type="text"
-          name="crane"
-          label="Crane:"
-          placeholder="Enter Crane(t)..."
         />
         <FormFields
           control={form.control}

@@ -2,11 +2,16 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Card from '@/components/Card';
+import { LineGraph } from '@/components/Line';
+import { DoughnutChart } from '@/components/DoughnutChart';
 import { getAllExpenses2 } from '@/lib/actions/expense.actions';
+import { getAllInvoice } from '@/lib/actions/invoice.actions';
 
 const Dashboard = () => {
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState<any>([]);
+
+  const [invoiceLength, setInvoiceLength] = useState(0);
 
   const fetchExpense = async () => {
     const expenseData: any = await getAllExpenses2();
@@ -24,10 +29,20 @@ const Dashboard = () => {
     setExpenses(temp2);
   };
 
+  const fetchInvoice = async () => {
+    const invoiceData: any = await getAllInvoice();
+
+    setInvoiceLength(invoiceData?.length);
+  };
+
   useEffect(() => {
-    // Expense
     fetchExpense();
+
+    fetchInvoice();
   }, []);
+
+  console.log(income);
+
   return (
     <>
       {/* cards */}
@@ -51,7 +66,7 @@ const Dashboard = () => {
             </div>
           </Card>
           <Card className="bg-white">
-            <div className="bg-[#F4F7FE] w-[56px] h-[56px] rounded-full flex items-center justify-center mr-5">
+            <div className="bg-[#F4F7FE] w-[56px] h-[56px] rounded-full flex items-center justify-center mr-4">
               <Image
                 src="/assets/money.svg"
                 alt="money"
@@ -61,20 +76,26 @@ const Dashboard = () => {
               />
             </div>
             <div className="flex flex-col items-start w-full">
-              <h3 className="text-[15px] text-slate-400">Spend month</h3>
-              <h2 className="text-2xl text-slate-800 font-bold">$0</h2>
-            </div>
-          </Card>
-
-          <Card className="bg-white">
-            <div className="flex flex-col items-start w-full">
               <h3 className="text-[15px] text-slate-400">Sales</h3>
               <h2 className="text-2xl text-slate-800 font-bold">${expenses}</h2>
+            </div>
+          </Card>
+          <Card className="bg-white">
+            <div className="flex flex-col items-start w-full">
+              <h3 className="text-[15px] text-slate-400">Total Invoice</h3>
+              <h2 className="text-2xl text-slate-800 font-bold">
+                {invoiceLength}
+              </h2>
             </div>
           </Card>
         </div>
 
         {/* Charts */}
+        <div className="flex gap-4 mr-2">
+          <LineGraph />
+
+          <DoughnutChart />
+        </div>
       </div>
     </>
   );

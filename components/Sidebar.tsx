@@ -52,7 +52,7 @@ const Sidebar = () => {
             </Link>
             <Link href="/dashboard/final" className="flex items-center gap-2">
               <TbCarCrane size={23} />
-              Total Crane
+              Total Sales
             </Link>
             <Link className="flex items-center gap-2" href="/dashboard/expense">
               <SiExpensify size={20} />

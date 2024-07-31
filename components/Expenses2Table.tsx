@@ -29,6 +29,7 @@ const Expenses2Table = ({ data }: any) => {
             <TableHead className="text-[#5874c7]">Dayactir:</TableHead>
             <TableHead className="text-[#5874c7]">Spare Parts:</TableHead>
             <TableHead className="text-[#5874c7]">Kharash Yar:</TableHead>
+            <TableHead className="text-[#5874c7]">Mushahar:</TableHead>
             <TableHead className="text-[#5874c7]">Net Total:</TableHead>
             <TableHead className="text-[#5874c7]">Date:</TableHead>
           </TableRow>
@@ -43,6 +44,7 @@ const Expenses2Table = ({ data }: any) => {
               <TableCell>{expense.dayactir}</TableCell>
               <TableCell>{expense.spareParts}</TableCell>
               <TableCell>{expense.smallExpense}</TableCell>
+              <TableCell>{expense.salary}</TableCell>
               <TableCell>{expense.netTotal}</TableCell>
               <TableCell>{formatDate(expense.createdAt)}</TableCell>
             </TableRow>

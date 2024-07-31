@@ -12,6 +12,7 @@ import {
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
+
 import {
   Popover,
   PopoverContent,
@@ -83,11 +84,14 @@ const EmployeeReport = () => {
           />
         </PopoverContent>
       </Popover>
+
       <div className="bg-white shadow-md">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="text-[#5874c7]">Employee:</TableHead>
+              <TableHead className="text-[#5874c7]">Phone:</TableHead>
+              <TableHead className="text-[#5874c7]">Address:</TableHead>
               <TableHead className="text-[#5874c7]">Mushaharka:</TableHead>
               <TableHead className="text-[#5874c7]">Horumarin:</TableHead>
               <TableHead className="text-[#5874c7]">Total:</TableHead>
@@ -97,7 +101,9 @@ const EmployeeReport = () => {
           <TableBody>
             {filteredData.map((salary: any) => (
               <TableRow key={salary.id}>
-                <TableCell>{salary.employee}</TableCell>
+                <TableCell>{salary.employee.name}</TableCell>
+                <TableCell>{salary.employee.phone}</TableCell>
+                <TableCell>{salary.employee.address}</TableCell>
                 <TableCell>{salary.amount}</TableCell>
                 <TableCell>{salary.horumarin}</TableCell>
                 <TableCell>{salary.amount - salary.horumarin}</TableCell>
