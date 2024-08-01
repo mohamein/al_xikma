@@ -49,6 +49,9 @@ export const expense1Validation = z.object({
   dayactir: z.number().int(),
   spareParts: z.number().int(),
   smallExpense: z.number().int(),
+  description: z.string().min(2, {
+    message: 'description must be at least 2 characters',
+  }),
   salary: z.number().int(),
   netTotal: z.number().int(),
 });

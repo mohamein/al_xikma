@@ -117,6 +117,7 @@ model Expense2 {
   dayactir     Float
   spareParts   Float
   smallExpense Float
+  description  Float
   salary       Float
   netTotal     Float
 

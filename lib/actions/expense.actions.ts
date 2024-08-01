@@ -3,6 +3,7 @@
 import { db } from '../db';
 import { revalidatePath } from 'next/cache';
 
+// Expenses 1
 export const createExpense1 = async (data: any) => {
   try {
     const expense = await db.expense1.create({
@@ -28,8 +29,39 @@ export const getAllExpenses1 = async () => {
   }
 };
 
-// Expenses 2
+export const updateExpense1 = async (id: string, data: any) => {
+  try {
+    const updatedExpense = await db.expense1.update({
+      where: {
+        id: id,
+      },
+      data: data,
+    });
 
+    revalidatePath('/dashboard/expense');
+
+    return updatedExpense;
+  } catch (err) {
+    console.log('Error at updating expense1', err);
+  }
+};
+
+export const deleteExpense1 = async (id: string) => {
+  try {
+    const deletedExpense = await db.expense1.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath('/dashboard/expense');
+    return deletedExpense;
+  } catch (err) {
+    console.log('Error at deleting expense', err);
+  }
+};
+
+// Expenses 2
 export const createExpense2 = async (data: any) => {
   try {
     const expense = await db.expense2.create({
@@ -50,5 +82,37 @@ export const getAllExpenses2 = async () => {
     return expense;
   } catch (err) {
     console.log('error well getting expenses 2', err);
+  }
+};
+
+export const updateExpense2 = async (id: string, data: any) => {
+  try {
+    const updatedExpense = await db.expense2.update({
+      where: {
+        id: id,
+      },
+      data: data,
+    });
+
+    revalidatePath('/dashboard/expense');
+
+    return updatedExpense;
+  } catch (err) {
+    console.log('Error at updating expense1', err);
+  }
+};
+
+export const deleteExpense2 = async (id: string) => {
+  try {
+    const deletedExpense = await db.expense2.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath('/dashboard/expense');
+    return deletedExpense;
+  } catch (err) {
+    console.log('Error at deleting expense', err);
   }
 };

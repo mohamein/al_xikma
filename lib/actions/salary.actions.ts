@@ -29,3 +29,33 @@ export const getAllSalary = async () => {
     console.error('An error occurred while creating a new salary:', err);
   }
 };
+
+export const updateSalary = async (id: string, data: any) => {
+  try {
+    const updatedSalary = await db.salary.update({
+      where: {
+        id: id,
+      },
+      data: data,
+    });
+    revalidatePath('/dashboard/salary');
+    return updatedSalary;
+  } catch (err) {
+    console.error('An error occurred while updating a salary:', err);
+  }
+};
+
+export const deleteSalary = async (id: string) => {
+  try {
+    const deletedSalary = await db.salary.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath('/dashboard/salary');
+    return deletedSalary;
+  } catch (err) {
+    console.error('An error occurred while deleting a salary:', err);
+  }
+};

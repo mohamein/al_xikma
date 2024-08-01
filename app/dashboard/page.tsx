@@ -17,11 +17,11 @@ const Dashboard = () => {
     const expenseData: any = await getAllExpenses2();
     let temp1: number = 0;
     let temp2: number = 0;
-    for (let i = 0; i < expenseData.length; i++) {
+    for (let i = 0; i < expenseData?.length; i++) {
       temp1 += parseFloat(expenseData[i].netTotal);
     }
 
-    for (let i = 0; i < expenseData.length; i++) {
+    for (let i = 0; i < expenseData?.length; i++) {
       temp2 += parseFloat(expenseData[i].total);
     }
 
@@ -40,8 +40,6 @@ const Dashboard = () => {
 
     fetchInvoice();
   }, []);
-
-  console.log(income);
 
   return (
     <>

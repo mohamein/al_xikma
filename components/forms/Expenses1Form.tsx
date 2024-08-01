@@ -53,6 +53,7 @@ const Expenses1Form = () => {
       dayactir: 0,
       spareParts: 0,
       smallExpense: 0,
+      description: '',
       salary: 0,
       netTotal: 0,
     },
@@ -62,8 +63,15 @@ const Expenses1Form = () => {
     setIsLoading(true);
 
     try {
-      const { oil, waterLaydh, internet, dayactir, spareParts, smallExpense } =
-        values;
+      const {
+        oil,
+        waterLaydh,
+        internet,
+        dayactir,
+        spareParts,
+        smallExpense,
+        description,
+      } = values;
       const netAmount =
         income - (oil + waterLaydh + dayactir + spareParts + smallExpense);
 
@@ -77,6 +85,7 @@ const Expenses1Form = () => {
         spareParts: spareParts,
         smallExpense: smallExpense,
         salary: salary,
+        description: description,
         netTotal: result,
       });
 
@@ -140,6 +149,13 @@ const Expenses1Form = () => {
           name="smallExpense"
           label="Kharash Yar"
           placeholder="Kharash Yar..."
+        />
+        <FormFields
+          control={form.control}
+          type="text"
+          name="description"
+          label="Description"
+          placeholder="Enter Description..."
         />
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>

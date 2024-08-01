@@ -51,7 +51,7 @@ const CustomTable = ({
               <TableCell className="flex items-center gap-2">
                 <Link
                   className="text-green-500"
-                  href={`/dashboard/employee/${employee.id}/update`}
+                  href={`/dashboard/employee/edit/${employee.id}`}
                 >
                   <FaEdit size={18} />
                 </Link>

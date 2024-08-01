@@ -2,7 +2,7 @@ import EmployeeForm from '@/components/forms/EmployeeForm';
 
 const CreateEmployee = () => {
   return (
-    <div className="flex flex-col gap-4 w-[500px] px-6">
+    <div className="flex flex-col gap-4 px-6">
       <div className="space-y-2">
         <h2 className="text-xl text-slate-700 font-semibold">
           Complete The Form
