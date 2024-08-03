@@ -16,12 +16,12 @@ const CraneTable = ({ data }: TableProps) => {
   const RenderTable = () => {
     return (
       <Table>
-        <TableHeader className="bg-red-600">
+        <TableHeader>
           <TableRow>
-            <TableHead className="text-white">Customer:</TableHead>
-            <TableHead className="text-white">Description:</TableHead>
-            <TableHead className="text-white">Price:</TableHead>
-            <TableHead className="text-white">Receipt_No:</TableHead>
+            <TableHead className="text-[#395CA0]">Customer:</TableHead>
+            <TableHead className="text-[#395CA0]">Description:</TableHead>
+            <TableHead className="text-[#395CA0]">Price:</TableHead>
+            <TableHead className="text-[#395CA0]">Receipt_No:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

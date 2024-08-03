@@ -4,7 +4,7 @@ import { FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
 
 import ExpenseTable from '@/components/ExpenseTable';
-import { getAllExpenses1 } from '@/lib/actions/expense.actions';
+import { getAllExpenses1, deleteExpense1 } from '@/lib/actions/expense.actions';
 
 interface ExpenseData {
   id: string;
@@ -18,16 +18,24 @@ interface ExpenseData {
 const Expense = () => {
   const [data, setData] = useState<ExpenseData[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const expense: any = await getAllExpenses1();
+  const fetchData = async () => {
+    const expense: any = await getAllExpenses1();
 
-      if (expense) {
-        setData(expense);
-      }
-    };
+    if (expense) {
+      setData(expense);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    const resp = await deleteExpense1(id);
+
+    if (resp) {
+      return fetchData();
+    }
+  };
   return (
     <div className="space-y-2">
       <h2 className="text-slate-800 font-semibold text-2xl">Expense</h2>
@@ -39,7 +47,7 @@ const Expense = () => {
         Create
       </Link>
 
-      <ExpenseTable data={data} />
+      <ExpenseTable handleDelete={handleDelete} data={data} />
     </div>
   );
 };

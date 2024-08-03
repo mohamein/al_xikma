@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import {
   Table,
   TableBody,
@@ -8,7 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from './ui/table';
-const SalaryTable = ({ data }: any) => {
+import { Button } from '@/components/ui/button';
+import { FaTrash, FaEdit } from 'react-icons/fa';
+interface SalaryProps {
+  data: any;
+  handleDelete: (id: string) => void;
+}
+const SalaryTable = ({ data, handleDelete }: SalaryProps) => {
   const formatDate = (date: Date) => {
     const dateOptions: any = {
       year: 'numeric',
@@ -30,6 +37,7 @@ const SalaryTable = ({ data }: any) => {
             <TableHead className="text-[#5874c7]">Horumarin:</TableHead>
             <TableHead className="text-[#5874c7]">Total:</TableHead>
             <TableHead className="text-[#5874c7]">Date:</TableHead>
+            <TableHead className="text-[#5874c7]">Actions:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -42,6 +50,21 @@ const SalaryTable = ({ data }: any) => {
               <TableCell>{salary.horumarin}</TableCell>
               <TableCell>{salary.total}</TableCell>
               <TableCell>{formatDate(salary.createdAt)}</TableCell>
+              <TableCell className="flex items-center gap-2">
+                <Link
+                  className="text-green-500"
+                  href={`/dashboard/salary/edit/${salary.id}`}
+                >
+                  <FaEdit size={18} />
+                </Link>
+                /
+                <Button
+                  onClick={() => handleDelete(salary?.id)}
+                  className="bg-transparent  border-none text-red-500  hover:bg-transparent"
+                >
+                  <FaTrash size={18} />
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

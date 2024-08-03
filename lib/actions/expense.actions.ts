@@ -25,7 +25,21 @@ export const getAllExpenses1 = async () => {
 
     return expense;
   } catch (err) {
-    console.error('An error occurred while creating a new crane:', err);
+    console.error('An error occurred while creating a new expense1:', err);
+  }
+};
+
+export const getExpense1ById = async (id: string) => {
+  try {
+    const expense = await db.expense1.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    revalidatePath('/dashboard/expense1');
+    return expense;
+  } catch (err) {
+    console.error('An error occurred while creating a new expense1:', err);
   }
 };
 
@@ -77,11 +91,29 @@ export const createExpense2 = async (data: any) => {
 
 export const getAllExpenses2 = async () => {
   try {
-    const expense = await db.expense2.findMany();
+    const expense = await db.expense2.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
     revalidatePath('/dashboard/expense1');
     return expense;
   } catch (err) {
     console.log('error well getting expenses 2', err);
+  }
+};
+
+export const getExpense2ById = async (id: string) => {
+  try {
+    const expense = await db.expense2.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    revalidatePath('/dashboard/expense1');
+    return expense;
+  } catch (err) {
+    console.error('An error occurred while getting expense2:', err);
   }
 };
 

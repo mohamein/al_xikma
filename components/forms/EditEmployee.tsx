@@ -6,38 +6,36 @@ import { Input } from '@/components/ui/input';
 import SubmitButton from '../SubmitButton';
 
 import { editEmployee } from '@/lib/actions/employee.actions';
-const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
+interface EditProps {
+  id: string;
+  form: any;
+  setForm: (form: string) => void;
+}
+const EditEmployee = ({ id, form, setForm }: EditProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    address: '',
-  });
 
   const handleChange = (e: any) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setForm((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
+    let name: string = e.target.name;
+    let value: string = e.target.value;
+
+    setForm({
+      ...form,
+      [name]: value,
     });
   };
 
-  console.log(form);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     setIsLoading(true);
     try {
-      const result = await editEmployee(id, {
+      const result: any = await editEmployee(id, {
         name: form.fullName,
         email: form.email,
         phone: form.phone,
         address: form.address,
+        createdAt: new Date(),
       });
       if (result) {
         console.log(result);
@@ -56,8 +54,8 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
           type="text"
           name="fullName"
           placeholder="Edit Employee Name"
-          value={employee?.name}
-          onChange={(e) => handleChange(e)}
+          value={form.fullName}
+          onChange={handleChange}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -66,7 +64,7 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
           type="text"
           name="email"
           placeholder="Edit Employee Email"
-          value={employee?.email}
+          value={form.email}
           onChange={handleChange}
         />
       </div>
@@ -76,7 +74,7 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
           type="text"
           name="phone"
           placeholder="Edit Employee Phone"
-          value={employee?.phone}
+          value={form.phone}
           onChange={handleChange}
         />
       </div>
@@ -86,7 +84,7 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
           type="text"
           name="address"
           placeholder="Edit Employee Address"
-          value={employee?.address}
+          value={form?.address}
           onChange={handleChange}
         />
       </div>

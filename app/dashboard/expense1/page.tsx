@@ -1,6 +1,6 @@
 'use client';
 import Expenses2Table from '@/components/Expenses2Table';
-import { getAllExpenses2 } from '@/lib/actions/expense.actions';
+import { getAllExpenses2, deleteExpense2 } from '@/lib/actions/expense.actions';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
@@ -8,16 +8,23 @@ import { FaPlus } from 'react-icons/fa';
 const Expenses1 = () => {
   const [data, setData] = useState<any>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const expense: any = await getAllExpenses2();
+  const fetchData = async () => {
+    const expense: any = await getAllExpenses2();
 
-      if (expense) {
-        setData(expense);
-      }
-    };
+    if (expense) {
+      setData(expense);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    const resp = await deleteExpense2(id);
+    if (resp) {
+      return fetchData();
+    }
+  };
   return (
     <div className="space-y-2">
       <h2 className="text-slate-800 font-semibold text-2xl">Expense</h2>
@@ -29,7 +36,7 @@ const Expenses1 = () => {
         Create
       </Link>
 
-      <Expenses2Table data={data} />
+      <Expenses2Table handleDelete={handleDelete} data={data} />
     </div>
   );
 };

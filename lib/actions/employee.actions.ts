@@ -22,7 +22,11 @@ export const createEmployee = async (data: EmployeeParams) => {
 
 export const getAllEmployee = async () => {
   try {
-    const employees = await db.employee.findMany();
+    const employees = await db.employee.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
     if (!employees) {
       console.log('No Data Found');
     }

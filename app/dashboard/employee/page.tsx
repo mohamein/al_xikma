@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import CustomTable from '@/components/CustomTable';
-import { getAllEmployee } from '@/lib/actions/employee.actions';
+import { getAllEmployee, deleteEmployee } from '@/lib/actions/employee.actions';
 
 interface EmployeeData {
   id: string;
@@ -21,19 +21,24 @@ const Employee = () => {
     address: 'Address',
   };
 
+  const fetchData = async () => {
+    const resp: any = await getAllEmployee();
+
+    if (resp) {
+      setData(resp);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const resp: any = await getAllEmployee();
-
-      if (resp) {
-        setData(resp);
-      }
-    };
-
     fetchData();
   }, []);
 
-  console.log(data);
+  const handleDelete = async (id: string) => {
+    const result = await deleteEmployee(id);
+
+    if (result) {
+      return fetchData();
+    }
+  };
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-slate-800 font-semibold text-2xl">Employee</h2>
@@ -45,7 +50,7 @@ const Employee = () => {
         Create
       </Link>
 
-      <CustomTable data={data} head={tableHead} />
+      <CustomTable handleDelete={handleDelete} data={data} head={tableHead} />
     </div>
   );
 };

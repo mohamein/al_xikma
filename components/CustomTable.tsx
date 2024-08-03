@@ -9,13 +9,17 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+
 interface CustomProps {
   data: any;
   head: any;
+  handleDelete: (id: string) => void;
 }
 const CustomTable = ({
   data,
   head: { fullName, email, phone, address },
+  handleDelete,
 }: CustomProps) => {
   const formatDate = (date: Date) => {
     const dateOptions: any = {
@@ -26,6 +30,7 @@ const CustomTable = ({
 
     return date.toLocaleDateString(undefined, dateOptions);
   };
+
   return (
     <div className="bg-white shadow-md mx-2">
       <Table>
@@ -56,12 +61,12 @@ const CustomTable = ({
                   <FaEdit size={18} />
                 </Link>
                 /
-                <Link
-                  className="text-red-500"
-                  href={`/dashboard/employee/${employee.id}/update`}
+                <Button
+                  onClick={() => handleDelete(employee?.id)}
+                  className="bg-transparent border-none text-red-500  hover:bg-transparent"
                 >
                   <FaTrash size={18} />
-                </Link>
+                </Button>
               </TableCell>
             </TableRow>
           ))}
