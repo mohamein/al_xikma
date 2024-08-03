@@ -17,16 +17,21 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
   });
 
   const handleChange = (e: any) => {
+    let name = e.target.name;
+    let value = e.target.value;
     setForm((prevState) => {
       return {
         ...prevState,
-        [e.target.name]: e.target.value,
+        [name]: value,
       };
     });
   };
 
+  console.log(form);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    setIsLoading(true);
     try {
       const result = await editEmployee(id, {
         name: form.fullName,
@@ -35,7 +40,9 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
         address: form.address,
       });
       if (result) {
+        console.log(result);
         router.push('/dashboard/employee');
+        setIsLoading(false);
       }
     } catch (err) {
       console.log(err);
@@ -50,11 +57,11 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
           name="fullName"
           placeholder="Edit Employee Name"
           value={employee?.name}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Employee Email:</Label>
+        <Label htmlFor="email">Employee Email:</Label>
         <Input
           type="text"
           name="email"
@@ -64,7 +71,7 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Employee Phone:</Label>
+        <Label htmlFor="phone">Employee Phone:</Label>
         <Input
           type="text"
           name="phone"
@@ -74,7 +81,7 @@ const EditEmployee = ({ id, employee }: { id: string; employee: any }) => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Employee Address:</Label>
+        <Label htmlFor="address">Employee Address:</Label>
         <Input
           type="text"
           name="address"
