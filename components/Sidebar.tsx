@@ -69,6 +69,10 @@ const Sidebar = () => {
               <FaFileInvoice size={20} />
               Invoices
             </Link>
+            <Link className="flex items-center gap-2" href="/dashboard/debts">
+              <FaFileInvoice size={20} />
+              Debts
+            </Link>
           </div>
         </ul>
         <ul className="text-[#5874c7] font-semibold flex flex-col space-y-3">

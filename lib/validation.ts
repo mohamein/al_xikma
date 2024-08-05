@@ -61,3 +61,13 @@ export const finalValidation = z.object({
   crane2: z.number().int(),
   crane3: z.number().int(),
 });
+
+export const debtValidation = z.object({
+  company: z.string().min(2, {
+    message: 'company name must be at least 2 characters',
+  }),
+  description: z.string().min(2, {
+    message: 'description must be at least 2 characters',
+  }),
+  amount: z.number().int(),
+});

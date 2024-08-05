@@ -19,3 +19,10 @@ declare interface CraneParams {
   price: number;
   receipt_no: string;
 }
+
+declare interface DebtParams {
+  id?: string;
+  company: string;
+  description: string;
+  amount: number;
+}

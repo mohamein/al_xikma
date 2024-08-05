@@ -30,8 +30,6 @@ const ExpenseForm = () => {
 
     fetchExpense();
   }, []);
-
-  console.log(income);
   const form = useForm<z.infer<typeof expenseValidation>>({
     resolver: zodResolver(expenseValidation),
     defaultValues: {

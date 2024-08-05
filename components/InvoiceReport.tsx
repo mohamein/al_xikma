@@ -47,7 +47,7 @@ const InvoiceReport = () => {
     fetchData();
   }, []);
   const handleFilterDate = (reportData: any, selectedDate: any) => {
-    if (!selectedDate) return data;
+    if (!selectedDate) return reportData;
 
     return reportData?.filter((report: any) => {
       const reportDate = new Date(report.createdAt);

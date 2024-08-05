@@ -3,7 +3,14 @@ import React, { useState, useEffect } from 'react';
 import CraneTable from '@/components/CraneTable';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
-import { getCrane1, getCrane2, getCrane3 } from '@/lib/actions/crane.actions';
+import {
+  getCrane1,
+  getCrane2,
+  getCrane3,
+  deleteCrane1,
+  deleteCrane2,
+  deleteCrane3,
+} from '@/lib/actions/crane.actions';
 interface Crane {
   id: string;
   customer: string;
@@ -44,6 +51,20 @@ const Crane = ({ params }: { params: any }) => {
       fetchData();
     }
   }, [params.id]);
+
+  const handleDelete = async (craneId: string) => {
+    let resp: any;
+    if (params.id === '1') {
+      resp = await deleteCrane1(craneId);
+      console.log(resp);
+    } else if (params.id === '2') {
+      resp = await deleteCrane2(craneId);
+      console.log(resp);
+    } else {
+      resp = await deleteCrane3(craneId);
+      console.log(resp);
+    }
+  };
   return (
     <div className="space-y-4">
       <h2 className="text-slate-800 font-semibold text-2xl">
@@ -58,7 +79,7 @@ const Crane = ({ params }: { params: any }) => {
         Create
       </Link>
 
-      <CraneTable data={data} />
+      <CraneTable handleDelete={handleDelete} data={data} id={params.id} />
     </div>
   );
 };

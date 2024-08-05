@@ -39,3 +39,48 @@ export const getAllInvoice = async () => {
     console.log('Error while getting invoice', err);
   }
 };
+
+export const getInvoiceById = async (id: string) => {
+  try {
+    const invoice = await db.invoiceTable.findUnique({
+      where: {
+        id,
+      },
+    });
+    revalidatePath('/dashboard/invoice');
+
+    return invoice;
+  } catch (err) {
+    console.log('Error while getting invoice', err);
+  }
+};
+
+export const editInvoice = async (id: string, data: any) => {
+  try {
+    const updatedInvoice = await db.invoiceTable.update({
+      data: data,
+      where: {
+        id: id,
+      },
+    });
+    revalidatePath('/dashboard/invoice');
+    return updatedInvoice;
+  } catch (err) {
+    console.log('Error while updating invoice', err);
+  }
+};
+
+export const deleteInvoice = async (id: string) => {
+  try {
+    const deletedInvoice = await db.invoiceTable.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath('/dashboard/invoice');
+    return deletedInvoice;
+  } catch (err) {
+    console.log('Error while deleting invoice', err);
+  }
+};

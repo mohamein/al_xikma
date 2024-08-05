@@ -18,6 +18,12 @@ enum Role {
   ADMIN
 }
 
+enum Status {
+  PAID
+  UNPAID
+  CANCELLED
+}
+
 model User {
   id       String @id @default(uuid())
   username String
@@ -141,6 +147,17 @@ model InvoiceTable {
   description String
   price       Float
   receipt_no  String
+  status      Status @default(UNPAID)
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Debts {
+  id          String @id @default(uuid())
+  company     String
+  description String
+  amount      Float
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
