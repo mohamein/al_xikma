@@ -6,27 +6,33 @@ import { LineGraph } from '@/components/Line';
 import { DoughnutChart } from '@/components/DoughnutChart';
 import { getAllExpenses2 } from '@/lib/actions/expense.actions';
 import { getAllInvoice } from '@/lib/actions/invoice.actions';
+import { getAllFinal } from '@/lib/actions/final.actions';
 
 const Dashboard = () => {
   const [income, setIncome] = useState(0);
-  const [expenses, setExpenses] = useState<any>([]);
+  const [sales, setSales] = useState<any>([]);
 
   const [invoiceLength, setInvoiceLength] = useState(0);
 
   const fetchExpense = async () => {
     const expenseData: any = await getAllExpenses2();
-    let temp1: number = 0;
-    let temp2: number = 0;
+    let temp: number = 0;
     for (let i = 0; i < expenseData?.length; i++) {
-      temp1 += parseFloat(expenseData[i].netTotal);
+      temp += parseFloat(expenseData[i].netTotal);
     }
 
-    for (let i = 0; i < expenseData?.length; i++) {
-      temp2 += parseFloat(expenseData[i].total);
+    setIncome(temp);
+  };
+
+  const fetchSales = async () => {
+    const sale: any = await getAllFinal();
+    let temp: number = 0;
+
+    for (let i = 0; i < sale?.length; i++) {
+      temp += parseFloat(sale[i].total);
     }
 
-    setIncome(temp1);
-    setExpenses(temp2);
+    setSales(temp);
   };
 
   const fetchInvoice = async () => {
@@ -36,8 +42,11 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    // Expenses
     fetchExpense();
-
+    // Sales
+    fetchSales();
+    // Invoice
     fetchInvoice();
   }, []);
 
@@ -60,7 +69,9 @@ const Dashboard = () => {
               <h3 className="text-[15px] font-medium text-slate-400">
                 Net Income
               </h3>
-              <h2 className="text-2xl text-slate-800 font-bold">${income}</h2>
+              <h2 className="text-2xl text-slate-800 font-bold">
+                ${income - sales}
+              </h2>
             </div>
           </Card>
           <Card className="bg-white">
@@ -75,7 +86,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col items-start w-full">
               <h3 className="text-[15px] text-slate-400">Sales</h3>
-              <h2 className="text-2xl text-slate-800 font-bold">${expenses}</h2>
+              <h2 className="text-2xl text-slate-800 font-bold">${sales}</h2>
             </div>
           </Card>
           <Card className="bg-white">

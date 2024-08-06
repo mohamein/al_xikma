@@ -104,8 +104,6 @@ model Expense1 {
   salary        Float
   expenses      Float
   description   String
-  // Total laso gelinayo
-  amount        Float
   total         Float
   feePercentage Float
   netIncome     Float

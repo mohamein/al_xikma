@@ -17,19 +17,6 @@ const ExpenseForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [income, setIncome] = useState<any>([]);
-  useEffect(() => {
-    const fetchExpense = async () => {
-      const expenseData: any = await getAllFinal();
-      let temp: number = 0;
-      for (let i = 0; i < expenseData.length; i++) {
-        temp += parseFloat(expenseData[i].total);
-      }
-
-      setIncome(temp);
-    };
-
-    fetchExpense();
-  }, []);
   const form = useForm<z.infer<typeof expenseValidation>>({
     resolver: zodResolver(expenseValidation),
     defaultValues: {
@@ -49,7 +36,7 @@ const ExpenseForm = () => {
     try {
       const { fuel, shaxaad, salary, expenses, description, feePercentage } =
         values;
-      const total1 = income - (fuel + shaxaad + expenses + salary);
+      const total1 = fuel + shaxaad + expenses + salary;
       const netAmount = total1 - feePercentage;
 
       const expenseData = await createExpense1({
@@ -58,7 +45,6 @@ const ExpenseForm = () => {
         salary: salary,
         expenses: expenses,
         description: description,
-        amount: income,
         total: total1,
         feePercentage: feePercentage,
         netIncome: netAmount,
@@ -78,10 +64,6 @@ const ExpenseForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
-          <Label>Dakhali:</Label>
-          <Input type="number" readOnly value={income} />
-        </div>
         <div className="flex gap-2 w-[400px]">
           <FormFields
             control={form.control}

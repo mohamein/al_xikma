@@ -29,7 +29,6 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-[#5874c7]">Dakhali:</TableHead>
             <TableHead className="text-[#5874c7]">Shidaal:</TableHead>
             <TableHead className="text-[#5874c7]">Shaxaad:</TableHead>
             <TableHead className="text-[#5874c7]">Salary:</TableHead>
@@ -45,7 +44,6 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
         <TableBody>
           {data.map((expense: any) => (
             <TableRow key={expense.id}>
-              <TableCell>{expense.amount}</TableCell>
               <TableCell>{expense.fuel}</TableCell>
               <TableCell>{expense.shaxaad}</TableCell>
               <TableCell>{expense.salary}</TableCell>

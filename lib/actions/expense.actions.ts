@@ -19,7 +19,11 @@ export const createExpense1 = async (data: any) => {
 
 export const getAllExpenses1 = async () => {
   try {
-    const expense = await db.expense1.findMany();
+    const expense = await db.expense1.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 
     revalidatePath('/dashboard/expense');
 
