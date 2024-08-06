@@ -70,7 +70,7 @@ const Dashboard = () => {
                 Net Income
               </h3>
               <h2 className="text-2xl text-slate-800 font-bold">
-                ${income - sales}
+                ${sales - income}
               </h2>
             </div>
           </Card>
