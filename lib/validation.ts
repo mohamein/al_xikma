@@ -33,6 +33,8 @@ export const craneValidation = z.object({
 export const expenseValidation = z.object({
   fuel: z.number().int(),
   shaxaad: z.number().int(),
+  waterLaydh: z.number().int(),
+  internet: z.number().int(),
   salary: z.number().int(),
   expenses: z.number().int(),
   description: z.string().min(2, {
@@ -44,8 +46,6 @@ export const expenseValidation = z.object({
 });
 export const expense1Validation = z.object({
   oil: z.number().int(),
-  waterLaydh: z.number().int(),
-  internet: z.number().int(),
   dayactir: z.number().int(),
   spareParts: z.number().int(),
   smallExpense: z.number().int(),

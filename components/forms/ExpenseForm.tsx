@@ -2,16 +2,14 @@
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { createExpense1 } from '@/lib/actions/expense.actions';
 import { expenseValidation } from '@/lib/validation';
-import { getAllFinal } from '@/lib/actions/final.actions';
+
 import SubmitButton from '../SubmitButton';
 import FormFields from '@/components/FormFields';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 
 const ExpenseForm = () => {
   const router = useRouter();
@@ -22,6 +20,8 @@ const ExpenseForm = () => {
     defaultValues: {
       fuel: 0,
       shaxaad: 0,
+      waterLaydh: 0,
+      internet: 0,
       salary: 0,
       expenses: 0,
       description: '',
@@ -34,14 +34,24 @@ const ExpenseForm = () => {
   async function onSubmit(values: z.infer<typeof expenseValidation>) {
     setIsLoading(true);
     try {
-      const { fuel, shaxaad, salary, expenses, description, feePercentage } =
-        values;
-      const total1 = fuel + shaxaad + expenses + salary;
+      const {
+        fuel,
+        shaxaad,
+        waterLaydh,
+        internet,
+        salary,
+        expenses,
+        description,
+        feePercentage,
+      } = values;
+      const total1 = fuel + waterLaydh + internet + shaxaad + expenses + salary;
       const netAmount = total1 - feePercentage;
 
       const expenseData = await createExpense1({
         fuel: fuel,
         shaxaad: shaxaad,
+        waterLayadh: waterLaydh,
+        internet: internet,
         salary: salary,
         expenses: expenses,
         description: description,
@@ -78,6 +88,22 @@ const ExpenseForm = () => {
             name="shaxaad"
             label="Shaxaad:"
             placeholder="Shaxaad..."
+          />
+        </div>
+        <div className="flex gap-2 w-[400px]">
+          <FormFields
+            control={form.control}
+            type="number"
+            name="waterLaydh"
+            label="Biyo & Laydh:"
+            placeholder="Enter amount..."
+          />
+          <FormFields
+            control={form.control}
+            type="number"
+            name="internet"
+            label="Internet:"
+            placeholder="Enter amount..."
           />
         </div>
 

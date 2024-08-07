@@ -30,8 +30,6 @@ const Expenses2Table = ({ data, handleDelete }: Expenses2Props) => {
           <TableRow>
             <TableHead className="text-[#5874c7]">Total Dakhli:</TableHead>
             <TableHead className="text-[#5874c7]">Saliid:</TableHead>
-            <TableHead className="text-[#5874c7]">Biyo Iyo Laydh:</TableHead>
-            <TableHead className="text-[#5874c7]">Internet:</TableHead>
             <TableHead className="text-[#5874c7]">Dayactir:</TableHead>
             <TableHead className="text-[#5874c7]">Spare Parts:</TableHead>
             <TableHead className="text-[#5874c7]">Kharash Yar:</TableHead>
@@ -47,8 +45,6 @@ const Expenses2Table = ({ data, handleDelete }: Expenses2Props) => {
             <TableRow key={expense.id}>
               <TableCell>{expense.total}</TableCell>
               <TableCell>{expense.oil}</TableCell>
-              <TableCell>{expense.waterLayadh}</TableCell>
-              <TableCell>{expense.internet}</TableCell>
               <TableCell>{expense.dayactir}</TableCell>
               <TableCell>{expense.spareParts}</TableCell>
               <TableCell>{expense.smallExpense}</TableCell>

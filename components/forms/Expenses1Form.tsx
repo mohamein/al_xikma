@@ -48,8 +48,6 @@ const Expenses1Form = () => {
     resolver: zodResolver(expense1Validation),
     defaultValues: {
       oil: 0,
-      waterLaydh: 0,
-      internet: 0,
       dayactir: 0,
       spareParts: 0,
       smallExpense: 0,
@@ -63,24 +61,13 @@ const Expenses1Form = () => {
     setIsLoading(true);
 
     try {
-      const {
-        oil,
-        waterLaydh,
-        internet,
-        dayactir,
-        spareParts,
-        smallExpense,
-        description,
-      } = values;
-      const netAmount =
-        income - (oil + waterLaydh + dayactir + spareParts + smallExpense);
+      const { oil, dayactir, spareParts, smallExpense, description } = values;
+      const netAmount = income + oil + dayactir + spareParts + smallExpense;
 
       const result = netAmount - salary;
       const expense = await createExpense2({
-        total: income,
         oil: oil,
-        waterLayadh: waterLaydh,
-        internet: internet,
+        total: income,
         dayactir: dayactir,
         spareParts: spareParts,
         smallExpense: smallExpense,
@@ -114,20 +101,6 @@ const Expenses1Form = () => {
           name="oil"
           label="Saliid"
           placeholder="Saliid"
-        />
-        <FormFields
-          control={form.control}
-          type="number"
-          name="waterLaydh"
-          label="Biyo iyo Laydh"
-          placeholder="Biyo Iyo Laydh..."
-        />
-        <FormFields
-          control={form.control}
-          type="number"
-          name="internet"
-          label="Internet"
-          placeholder="Internet..."
         />
         <FormFields
           control={form.control}

@@ -31,6 +31,8 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
           <TableRow>
             <TableHead className="text-[#5874c7]">Shidaal:</TableHead>
             <TableHead className="text-[#5874c7]">Shaxaad:</TableHead>
+            <TableHead className="text-[#5874c7]">Biyo Iyo Laydh:</TableHead>
+            <TableHead className="text-[#5874c7]">Internet:</TableHead>
             <TableHead className="text-[#5874c7]">Salary:</TableHead>
             <TableHead className="text-[#5874c7]">Expenses:</TableHead>
             <TableHead className="text-[#5874c7]">Description:</TableHead>
@@ -46,6 +48,8 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
             <TableRow key={expense.id}>
               <TableCell>{expense.fuel}</TableCell>
               <TableCell>{expense.shaxaad}</TableCell>
+              <TableCell>{expense.waterLayadh}</TableCell>
+              <TableCell>{expense.internet}</TableCell>
               <TableCell>{expense.salary}</TableCell>
               <TableCell>{expense.expenses}</TableCell>
               <TableCell>{expense.description}</TableCell>
