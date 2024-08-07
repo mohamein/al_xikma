@@ -62,7 +62,7 @@ const DebtForm = () => {
           type="number"
           name="amount"
           placeholder="Enter amount...."
-          label="Company"
+          label="Amount"
         />
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
