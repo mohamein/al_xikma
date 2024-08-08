@@ -62,7 +62,7 @@ const Expenses1Form = () => {
 
     try {
       const { oil, dayactir, spareParts, smallExpense, description } = values;
-      const netAmount = income + oil + dayactir + spareParts + smallExpense;
+      const netAmount = income - (oil + dayactir + spareParts + smallExpense);
 
       const result = netAmount - salary;
       const expense = await createExpense2({
