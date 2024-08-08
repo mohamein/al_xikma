@@ -2,14 +2,10 @@
 import { db } from '../db';
 import { revalidatePath } from 'next/cache';
 
-export const createDebt = async (data: DebtParams) => {
+export const createDebt = async (data: any) => {
   try {
     const debt = await db.debts.create({
-      data: {
-        company: data.company,
-        description: data.description,
-        amount: data.amount,
-      },
+      data: data,
     });
 
     revalidatePath('/dashboard/debts');
@@ -46,7 +42,7 @@ export const getDebtById = async (id: string) => {
     console.log('Error occurred while getting a debt', err);
   }
 };
-export const updateDebt = async (id: string, data: DebtParams) => {
+export const updateDebt = async (id: string, data: any) => {
   try {
     const updatedDebt = await db.debts.update({
       data: data,

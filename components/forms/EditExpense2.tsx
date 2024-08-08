@@ -4,7 +4,17 @@ import { useRouter } from 'next/navigation';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import SubmitButton from '../SubmitButton';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { CalendarIcon } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
 import { updateExpense2 } from '@/lib/actions/expense.actions';
+import { Button } from '../ui/button';
+import { format } from 'date-fns';
 interface EditExpense2Props {
   id: string;
   form: any;
@@ -13,6 +23,7 @@ interface EditExpense2Props {
 const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState<Date>();
 
   const handleChange = (e: any) => {
     let name: string = e.target.name;
@@ -27,12 +38,7 @@ const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
     });
   };
 
-  const adding =
-    form.oil +
-    form.waterLayadh +
-    form.dayactir +
-    form.spareParts +
-    form.smallExpense;
+  const adding = form.oil + form.dayactir + form.spareParts + form.smallExpense;
   const netAmount = form.total - adding;
   const result = netAmount - form.salary;
   console.log('Net total', result);
@@ -45,13 +51,12 @@ const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
     try {
       const resp = await updateExpense2(id, {
         oil: form.oil,
-        waterLayadh: form.waterLayadh,
-        internet: form.internet,
         dayactir: form.dayactir,
         spareParts: form.spareParts,
         smallExpense: form.smallExpense,
         description: form.description,
         salary: form.salary,
+        expense_date: date,
         total: netAmount,
         netTotal: result,
       });
@@ -85,28 +90,6 @@ const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
           max="999999"
           name="oil"
           value={form.oil}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="waterLayadh">Biyo & Layadh:</Label>
-        <Input
-          type="number"
-          min="0"
-          max="999999"
-          name="waterLayadh"
-          value={form.waterLayadh}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="internet">Internet:</Label>
-        <Input
-          type="number"
-          min="0"
-          max="999999"
-          name="internet"
-          value={form.internet}
           onChange={handleChange}
         />
       </div>
@@ -160,6 +143,36 @@ const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
           value={form.salary}
           onChange={handleChange}
         />
+      </div>
+
+      <div className="mt-7">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[280px] justify-start text-left font-normal',
+                !date && 'text-[#5874c7]'
+              )}
+            >
+              <CalendarIcon className="mr-2 h-6 w-6" />
+              {date ? (
+                format(date, 'MMM y')
+              ) : (
+                <span className="font-medium">Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
       <SubmitButton isLoading={isLoading}>Edit</SubmitButton>
     </form>

@@ -1,8 +1,18 @@
 'use client';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Button } from '../ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { CalendarIcon } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
 import SubmitButton from '../SubmitButton';
 import { updateExpense1 } from '@/lib/actions/expense.actions';
 interface EditExpense1Props {
@@ -13,6 +23,7 @@ interface EditExpense1Props {
 const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState<Date>();
 
   const handleChange = (e: any) => {
     let name: string = e.target.name;
@@ -27,25 +38,37 @@ const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
     });
   };
 
-  const total =
-    form.amount + form.salary + form.expenses + form.shaxaad + form.fuel;
-
-  const netAmount = total - form.feePercentage;
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const {
+      fuel,
+      shaxaad,
+      internet,
+      waterLaydh,
+      salary,
+      expenses,
+      feePercentage,
+      description,
+      income,
+    } = form;
+    const total = fuel + shaxaad + internet + waterLaydh + salary + expenses;
+
+    const netAmount = total - feePercentage;
 
     setIsLoading(true);
 
     try {
       const resp = await updateExpense1(id, {
-        income: form.income,
-        fuel: form.fuel,
-        shaxaad: form.shaxaad,
-        salary: form.salary,
-        expenses: form.expenses,
-        description: form.description,
-        feePercentage: form.feePercentage,
+        income: income,
+        fuel: fuel,
+        shaxaad: shaxaad,
+        internet: internet,
+        waterLayadh: waterLaydh,
+        salary: salary,
+        expenses: expenses,
+        description: description,
+        feePercentage: feePercentage,
+        expense_date: date,
         total: total,
         netIncome: netAmount,
       });
@@ -79,6 +102,28 @@ const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
           max="999999"
           name="fuel"
           value={form.fuel}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <Label htmlFor="">Internet:</Label>
+        <Input
+          type="number"
+          min="0"
+          max="999999"
+          name="fuel"
+          value={form.internet}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <Label htmlFor="">Biyo Iyo Laydh:</Label>
+        <Input
+          type="number"
+          min="0"
+          max="999999"
+          name="fuel"
+          value={form.waterLaydh}
           onChange={handleChange}
         />
       </div>
@@ -135,6 +180,36 @@ const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
           value={form.feePercentage}
           onChange={handleChange}
         />
+      </div>
+
+      <div className="mt-7">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[280px] justify-start text-left font-normal',
+                !date && 'text-[#5874c7]'
+              )}
+            >
+              <CalendarIcon className="mr-2 h-6 w-6" />
+              {date ? (
+                format(date, 'MMM y')
+              ) : (
+                <span className="font-medium">Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
       <SubmitButton isLoading={isLoading}>Edit</SubmitButton>
     </form>

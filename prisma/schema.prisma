@@ -57,8 +57,10 @@ model Salary {
   employeeId String
   employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   total      Float
-  createdAt  DateTime @default(now())
-  updateAt   DateTime @updatedAt
+
+  salary_date DateTime
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
 }
 
 // Elevators
@@ -69,8 +71,9 @@ model SmallElevator {
   price       Float
   receipt_no  String
 
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  small_date DateTime
+  createdAt  DateTime @default(now())
+  updateAt   DateTime @updatedAt
 }
 
 model MiddleElevator {
@@ -80,8 +83,9 @@ model MiddleElevator {
   price       Float
   receipt_no  String
 
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  middle_date DateTime
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
 }
 
 model LargeElevator {
@@ -91,14 +95,15 @@ model LargeElevator {
   price       Float
   receipt_no  String
 
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  large_date DateTime
+  createdAt  DateTime @default(now())
+  updateAt   DateTime @updatedAt
 }
 
 // Final Table
 
 model Expense1 {
-  id            String @id @default(uuid())
+  id            String   @id @default(uuid())
   fuel          Float
   shaxaad       Float
   waterLayadh   Float
@@ -109,13 +114,14 @@ model Expense1 {
   total         Float
   feePercentage Float
   netIncome     Float
+  expense_date  DateTime
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
 
 model Expense2 {
-  id           String @id @default(uuid())
+  id           String   @id @default(uuid())
   total        Float
   oil          Float
   dayactir     Float
@@ -124,19 +130,22 @@ model Expense2 {
   description  String
   salary       Float
   netTotal     Float
+  expense_date DateTime
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
 
 model FinalTable {
-  id        String   @id @default(uuid())
-  crane1    Float
-  crane2    Float
-  crane3    Float
-  total     Float
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  id     String @id @default(uuid())
+  crane1 Float
+  crane2 Float
+  crane3 Float
+  total  Float
+
+  sales_date DateTime
+  createdAt  DateTime @default(now())
+  updateAt   DateTime @updatedAt
 }
 
 model InvoiceTable {
@@ -147,6 +156,8 @@ model InvoiceTable {
   receipt_no  String
   status      Status @default(UNPAID)
 
+  invoice_date DateTime
+
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
@@ -156,6 +167,8 @@ model Debts {
   company     String
   description String
   amount      Float
+
+  debt_date DateTime
 
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt

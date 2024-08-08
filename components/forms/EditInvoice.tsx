@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -10,6 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+import { Button } from '../ui/button';
+import { Calendar } from '../ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { CalendarIcon } from 'lucide-react';
 import SubmitButton from '@/components/SubmitButton';
 import { editInvoice } from '@/lib/actions/invoice.actions';
 interface EditInvoiceProps {
@@ -21,6 +28,7 @@ const EditInvoice = ({ id, form, setForm }: EditInvoiceProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
+  const [date, setDate] = useState<Date>();
   const handleChange = (e: any) => {
     let valueForm: string | number = e.target.value;
     let name: string = e.target.name;
@@ -49,6 +57,7 @@ const EditInvoice = ({ id, form, setForm }: EditInvoiceProps) => {
         customer: form.customer,
         description: form.description,
         price: form.price,
+        invoice_date: date,
         status: selectedValue,
       });
 
@@ -108,6 +117,35 @@ const EditInvoice = ({ id, form, setForm }: EditInvoiceProps) => {
             <SelectItem value="CANCELLED">CANCELLED</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+      <div className="mt-4">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[280px] justify-start text-left font-normal',
+                !date && 'text-[#5874c7]'
+              )}
+            >
+              <CalendarIcon className="mr-2 h-6 w-6" />
+              {date ? (
+                format(date, 'MMM y')
+              ) : (
+                <span className="font-medium">Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
       <SubmitButton isLoading={isLoading}>Edit</SubmitButton>
     </form>

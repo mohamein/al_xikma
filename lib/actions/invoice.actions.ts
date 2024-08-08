@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { db } from '../db';
 
-export const createInvoice = async (data: CraneParams) => {
+export const createInvoice = async (data: any) => {
   try {
     const invoice = await db.invoiceTable.create({
       data: data,

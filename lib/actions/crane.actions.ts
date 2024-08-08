@@ -4,17 +4,12 @@ import { db } from '../db';
 import { revalidatePath } from 'next/cache';
 
 // Creating Crane 1--3
-export const createCrane1 = async (data: CraneParams) => {
+export const createCrane1 = async (data: any) => {
   try {
     let crane;
 
     crane = await db.smallElevator.create({
-      data: {
-        customer: data.customer,
-        description: data.description,
-        price: data.price,
-        receipt_no: data.receipt_no,
-      },
+      data: data,
     });
     revalidatePath(`/dashboard/crane/1`);
     return crane;
@@ -22,17 +17,12 @@ export const createCrane1 = async (data: CraneParams) => {
     console.error('An error occurred while creating a new crane:', err);
   }
 };
-export const createCrane2 = async (data: CraneParams) => {
+export const createCrane2 = async (data: any) => {
   try {
     let crane;
 
     crane = await db.middleElevator.create({
-      data: {
-        customer: data.customer,
-        description: data.description,
-        price: data.price,
-        receipt_no: data.receipt_no,
-      },
+      data: data,
     });
     revalidatePath(`/dashboard/crane/2`);
     return crane;
@@ -40,17 +30,12 @@ export const createCrane2 = async (data: CraneParams) => {
     console.error('An error occurred while creating a new crane:', err);
   }
 };
-export const createCrane3 = async (data: CraneParams) => {
+export const createCrane3 = async (data: any) => {
   try {
     let crane;
 
     crane = await db.largeElevator.create({
-      data: {
-        customer: data.customer,
-        description: data.description,
-        price: data.price,
-        receipt_no: data.receipt_no,
-      },
+      data: data,
     });
     revalidatePath(`/dashboard/crane/3`);
     return crane;
@@ -136,7 +121,7 @@ export const getCrane3ById = async (id: string) => {
 };
 
 // Updating Crane 1--3
-export const updateCrane1 = async (id: string, data: CraneParams) => {
+export const updateCrane1 = async (id: string, data: any) => {
   try {
     const updatedCrane = await db.smallElevator.update({
       data: data,
@@ -151,7 +136,7 @@ export const updateCrane1 = async (id: string, data: CraneParams) => {
     console.log('Error occurs while updating crane 1', err);
   }
 };
-export const updateCrane2 = async (id: string, data: CraneParams) => {
+export const updateCrane2 = async (id: string, data: any) => {
   try {
     const updatedCrane = await db.middleElevator.update({
       data: data,
@@ -166,7 +151,7 @@ export const updateCrane2 = async (id: string, data: CraneParams) => {
     console.log('Error occurs while updating crane 1', err);
   }
 };
-export const updateCrane3 = async (id: string, data: CraneParams) => {
+export const updateCrane3 = async (id: string, data: any) => {
   try {
     const updatedCrane = await db.largeElevator.update({
       data: data,

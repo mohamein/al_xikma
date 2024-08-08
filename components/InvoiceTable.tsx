@@ -83,7 +83,7 @@ const InvoiceTable = ({ data, handleDelete }: InvoiceProps) => {
                   {invoice.status}
                 </TableCell>
                 <TableCell>{invoice.price}</TableCell>
-                <TableCell>{formatDate(invoice.createdAt)}</TableCell>
+                <TableCell>{formatDate(invoice.invoice_date)}</TableCell>
 
                 <TableCell className="flex items-center gap-2">
                   <Link

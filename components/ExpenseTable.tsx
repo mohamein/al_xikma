@@ -56,7 +56,7 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
               <TableCell>{expense.total}</TableCell>
               <TableCell>{expense.feePercentage}</TableCell>
               <TableCell>{expense.netIncome}</TableCell>
-              <TableCell>{formatDate(expense.createdAt)}</TableCell>
+              <TableCell>{formatDate(expense.expense_date)}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <Link
                   className="text-green-500"

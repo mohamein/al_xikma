@@ -51,7 +51,7 @@ const InvoiceReport = () => {
     if (!selectedDate) return reportData;
 
     return reportData?.filter((report: any) => {
-      const reportDate = new Date(report.createdAt);
+      const reportDate = new Date(report.invoice_date);
       return (
         reportDate.toDateString() === new Date(selectedDate).toDateString()
       );
@@ -160,7 +160,7 @@ const InvoiceReport = () => {
                   {list.status}
                 </TableCell>
                 <TableCell>{list.price}</TableCell>
-                <TableCell>{formatDate(list.createdAt)}</TableCell>
+                <TableCell>{formatDate(list.invoice_date)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -2,7 +2,7 @@
 import { db } from '../db';
 import { revalidatePath } from 'next/cache';
 
-export const createSalary = async (data: SalaryParams) => {
+export const createSalary = async (data: any) => {
   try {
     const salary = await db.salary.create({
       data: data,

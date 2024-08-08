@@ -9,6 +9,7 @@ declare interface SalaryParams {
   employeeId: string;
   amount: number;
   horumarin: number;
+  salary_date: Date;
   total: number;
 }
 

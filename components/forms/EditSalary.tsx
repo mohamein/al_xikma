@@ -1,8 +1,16 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
+
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+
+import { Button } from '../ui/button';
+import { Calendar } from '../ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { CalendarIcon } from 'lucide-react';
 import SubmitButton from '../SubmitButton';
 import { updateSalary } from '@/lib/actions/salary.actions';
 interface EditSalaryProps {
@@ -12,6 +20,7 @@ interface EditSalaryProps {
 }
 const EditSalary = ({ id, form, setForm }: EditSalaryProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState<Date>();
   const router = useRouter();
 
   const handleChange = (e: any) => {
@@ -33,6 +42,7 @@ const EditSalary = ({ id, form, setForm }: EditSalaryProps) => {
       const resp = await updateSalary(id, {
         amount: form.amount,
         horumarin: form.horumarin,
+        salary_date: date,
         total: netTotal,
         employeeId: form.employeeId,
       });
@@ -66,6 +76,36 @@ const EditSalary = ({ id, form, setForm }: EditSalaryProps) => {
           value={form.horumarin}
           onChange={handleChange}
         />
+      </div>
+
+      <div className="mt-4">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[280px] justify-start text-left font-normal',
+                !date && 'text-[#5874c7]'
+              )}
+            >
+              <CalendarIcon className="mr-2 h-6 w-6" />
+              {date ? (
+                format(date, 'MMM y')
+              ) : (
+                <span className="font-medium">Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
       <div>
         <Label htmlFor="total">Total:</Label>

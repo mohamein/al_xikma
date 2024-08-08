@@ -6,8 +6,6 @@ const EditExpense2Page = ({ params }: any) => {
   const [form, setForm] = useState<any>({
     total: 0,
     oil: 0,
-    waterLayadh: 0,
-    internet: 0,
     dayactir: 0,
     spareParts: 0,
     smallExpense: 0,
@@ -21,8 +19,6 @@ const EditExpense2Page = ({ params }: any) => {
       setForm({
         total: resp.total,
         oil: resp.oil,
-        waterLaydh: resp.waterLaydh,
-        internet: resp.internet,
         dayactir: resp.dayactir,
         spareParts: resp.spareParts,
         smallExpense: resp.smallExpense,

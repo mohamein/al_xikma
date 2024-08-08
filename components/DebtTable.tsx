@@ -42,7 +42,7 @@ const DebtTable = ({ data, handleDelete }: DebtProps) => {
               <TableCell>{debt?.company}</TableCell>
               <TableCell>{debt?.description}</TableCell>
               <TableCell>{debt?.amount}</TableCell>
-              <TableCell>{formatDate(debt?.createdAt)}</TableCell>
+              <TableCell>{formatDate(debt?.debt_date)}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <Link
                   className="text-green-500"

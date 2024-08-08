@@ -49,7 +49,7 @@ const SalaryTable = ({ data, handleDelete }: SalaryProps) => {
               <TableCell>{salary.amount}</TableCell>
               <TableCell>{salary.horumarin}</TableCell>
               <TableCell>{salary.total}</TableCell>
-              <TableCell>{formatDate(salary.createdAt)}</TableCell>
+              <TableCell>{formatDate(salary.salary_date)}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <Link
                   className="text-green-500"

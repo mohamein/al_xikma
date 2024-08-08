@@ -6,6 +6,8 @@ const EditExpensesPage = ({ params }: any) => {
   const [form, setForm] = useState<any>({
     amount: 0,
     fuel: 0,
+    internet: 0,
+    waterLaydh: 0,
     shaxaad: 0,
     salary: 0,
     expenses: 0,
@@ -19,6 +21,8 @@ const EditExpensesPage = ({ params }: any) => {
       setForm({
         amount: resp.amount,
         fuel: resp.fuel,
+        internet: resp.internet,
+        waterLaydh: resp.waterLayadh,
         shaxaad: resp.shaxaad,
         salary: resp.salary,
         expenses: resp.expenses,

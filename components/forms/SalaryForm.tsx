@@ -15,7 +15,13 @@ import {
 import { salaryValidation } from '@/lib/validation';
 import SubmitButton from '../SubmitButton';
 import FormFields from '@/components/FormFields';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
+import { Button } from '../ui/button';
+import { Calendar } from '../ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { CalendarIcon } from 'lucide-react';
 import { createSalary } from '@/lib/actions/salary.actions';
 import { getAllEmployee } from '@/lib/actions/employee.actions';
 
@@ -24,6 +30,7 @@ const SalaryForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [employeeId, setEmployeeId] = useState('');
   const [employee, setEmployee] = useState<any>([]);
+  const [date, setDate] = useState<Date>();
 
   useEffect(() => {
     const fetchEmployee = async () => {
@@ -50,6 +57,7 @@ const SalaryForm = () => {
         employeeId: employeeId,
         amount: amount,
         horumarin: horumarin,
+        salary_date: date,
         total: netTotal,
       });
       if (salaryData) {
@@ -96,7 +104,35 @@ const SalaryForm = () => {
           label="Horumarin:"
           placeholder="Xaddiga Horumarinta..."
         />
+        <div className="mt-4">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={'outline'}
+                className={cn(
+                  'w-[280px] justify-start text-left font-normal',
+                  !date && 'text-[#5874c7]'
+                )}
+              >
+                <CalendarIcon className="mr-2 h-6 w-6" />
+                {date ? (
+                  format(date, 'MMM y')
+                ) : (
+                  <span className="font-medium">Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
 
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
     </Form>

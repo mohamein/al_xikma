@@ -5,16 +5,28 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
+
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { CalendarIcon } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
 import { createExpense1 } from '@/lib/actions/expense.actions';
 import { expenseValidation } from '@/lib/validation';
 
 import SubmitButton from '../SubmitButton';
 import FormFields from '@/components/FormFields';
+import { format } from 'date-fns';
 
 const ExpenseForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [income, setIncome] = useState<any>([]);
+  const [date, setDate] = useState<Date>();
   const form = useForm<z.infer<typeof expenseValidation>>({
     resolver: zodResolver(expenseValidation),
     defaultValues: {
@@ -57,6 +69,7 @@ const ExpenseForm = () => {
         description: description,
         total: total1,
         feePercentage: feePercentage,
+        expense_date: date,
         netIncome: netAmount,
       });
 
@@ -138,6 +151,36 @@ const ExpenseForm = () => {
           label="Khidmada:"
           placeholder="Khidmada..."
         />
+
+        <div className="mt-7">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={'outline'}
+                className={cn(
+                  'w-[280px] justify-start text-left font-normal',
+                  !date && 'text-[#5874c7]'
+                )}
+              >
+                <CalendarIcon className="mr-2 h-6 w-6" />
+                {date ? (
+                  format(date, 'MMM y')
+                ) : (
+                  <span className="font-medium">Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
 
         <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
