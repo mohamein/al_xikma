@@ -88,11 +88,11 @@ const Expenses1Form = () => {
 
   async function onSubmit(values: z.infer<typeof expense1Validation>) {
     setIsLoading(true);
-    console.log(values);
     try {
       const { oil, dayactir, spareParts, smallExpense, description } = values;
-      const netAmount = subTotal - (oil + dayactir + spareParts + smallExpense);
-      const result = netAmount - salary;
+      const addition = oil + dayactir + spareParts + smallExpense;
+      const totalAmount = subTotal - addition;
+      const result = totalAmount - salary;
       const expense = await createExpense2({
         oil: oil,
         total: subTotal,
@@ -116,10 +116,6 @@ const Expenses1Form = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div>
-          <Label>Dakhali:</Label>
-          <Input type="number" readOnly value={subTotal} />
-        </div>
         <div>
           <Label>Salary:</Label>
           <Input type="number" readOnly value={salary} />

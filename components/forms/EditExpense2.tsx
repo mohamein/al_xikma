@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -12,9 +12,10 @@ import {
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-import { updateExpense2 } from '@/lib/actions/expense.actions';
+import { getAllExpenses1, updateExpense2 } from '@/lib/actions/expense.actions';
 import { Button } from '../ui/button';
 import { format } from 'date-fns';
+import { getAllFinal } from '@/lib/actions/final.actions';
 interface EditExpense2Props {
   id: string;
   form: any;
@@ -23,6 +24,8 @@ interface EditExpense2Props {
 const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [income, setIncome] = useState<any>([]);
+  const [sales, setSales] = useState<any>([]);
   const [date, setDate] = useState<Date>();
 
   const handleChange = (e: any) => {
@@ -37,11 +40,37 @@ const EditExpense2 = ({ id, form, setForm }: EditExpense2Props) => {
       [name]: value,
     });
   };
+  // Expenses Total
+  const fetchExpense = async () => {
+    const expenseData: any = await getAllExpenses1();
+    let temp: number = 0;
+    for (let i = 0; i < expenseData?.length; i++) {
+      temp += parseFloat(expenseData[i].netIncome);
+    }
+    setIncome(temp);
+  };
+  // Sales total
+  const fetchSales = async () => {
+    const sale: any = await getAllFinal();
+    let temp: number = 0;
+
+    for (let i = 0; i < sale?.length; i++) {
+      temp += parseFloat(sale[i].total);
+    }
+
+    setSales(temp);
+  };
+
+  useEffect(() => {
+    // Expenses 1 total
+    fetchExpense();
+    // Sales total
+    fetchSales();
+  }, []);
 
   const adding = form.oil + form.dayactir + form.spareParts + form.smallExpense;
   const netAmount = form.total - adding;
-  const result = netAmount - form.salary;
-  console.log('Net total', result);
+  const result = netAmount;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
