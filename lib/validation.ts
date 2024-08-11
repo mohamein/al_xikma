@@ -40,8 +40,6 @@ export const expenseValidation = z.object({
   description: z.string().min(2, {
     message: 'description must be at least 2 characters',
   }),
-  feePercentage: z.number().int(),
-  total: z.number().int(),
   netIncome: z.number().int(),
 });
 export const expense1Validation = z.object({
@@ -52,7 +50,6 @@ export const expense1Validation = z.object({
   description: z.string().min(2, {
     message: 'description must be at least 2 characters',
   }),
-  salary: z.number().int(),
   netTotal: z.number().int(),
 });
 
@@ -70,4 +67,9 @@ export const debtValidation = z.object({
     message: 'description must be at least 2 characters',
   }),
   amount: z.number().int(),
+});
+
+export const monthExpenseValidation = z.object({
+  feePercentage: z.number().int(),
+  salary: z.number().int(),
 });

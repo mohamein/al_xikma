@@ -4,7 +4,6 @@ import EditExpense1 from '@/components/forms/EditExpense1';
 import { getExpense1ById } from '@/lib/actions/expense.actions';
 const EditExpensesPage = ({ params }: any) => {
   const [form, setForm] = useState<any>({
-    amount: 0,
     fuel: 0,
     internet: 0,
     waterLaydh: 0,
@@ -12,14 +11,12 @@ const EditExpensesPage = ({ params }: any) => {
     salary: 0,
     expenses: 0,
     description: '',
-    feePercentage: 0,
   });
 
   useEffect(() => {
     const fetchById = async () => {
       const resp: any = await getExpense1ById(params.id);
       setForm({
-        amount: resp.amount,
         fuel: resp.fuel,
         internet: resp.internet,
         waterLaydh: resp.waterLayadh,
@@ -27,7 +24,6 @@ const EditExpensesPage = ({ params }: any) => {
         salary: resp.salary,
         expenses: resp.expenses,
         description: resp.description,
-        feePercentage: resp.feePercentage,
       });
     };
 

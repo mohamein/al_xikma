@@ -36,8 +36,6 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
             <TableHead className="text-[#5874c7]">Salary:</TableHead>
             <TableHead className="text-[#5874c7]">Expenses:</TableHead>
             <TableHead className="text-[#5874c7]">Description:</TableHead>
-            <TableHead className="text-[#5874c7]">Total:</TableHead>
-            <TableHead className="text-[#5874c7]">Khidmada:</TableHead>
             <TableHead className="text-[#5874c7]">Net Total:</TableHead>
             <TableHead className="text-[#5874c7]">Date:</TableHead>
             <TableHead className="text-[#5874c7]">Actions:</TableHead>
@@ -53,8 +51,6 @@ const ExpenseTable = ({ data, handleDelete }: ExpenseProps) => {
               <TableCell>{expense.salary}</TableCell>
               <TableCell>{expense.expenses}</TableCell>
               <TableCell>{expense.description}</TableCell>
-              <TableCell>{expense.total}</TableCell>
-              <TableCell>{expense.feePercentage}</TableCell>
               <TableCell>{expense.netIncome}</TableCell>
               <TableCell>{formatDate(expense.expense_date)}</TableCell>
               <TableCell className="flex items-center gap-2">

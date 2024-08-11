@@ -28,13 +28,11 @@ const Expenses2Table = ({ data, handleDelete }: Expenses2Props) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-[#5874c7]">Total Dakhli:</TableHead>
             <TableHead className="text-[#5874c7]">Saliid:</TableHead>
             <TableHead className="text-[#5874c7]">Dayactir:</TableHead>
             <TableHead className="text-[#5874c7]">Spare Parts:</TableHead>
             <TableHead className="text-[#5874c7]">Kharash Yar:</TableHead>
             <TableHead className="text-[#5874c7]">Description:</TableHead>
-            <TableHead className="text-[#5874c7]">Mushahar:</TableHead>
             <TableHead className="text-[#5874c7]">Net Total:</TableHead>
             <TableHead className="text-[#5874c7]">Date:</TableHead>
             <TableHead className="text-[#5874c7]">Actions:</TableHead>
@@ -43,13 +41,11 @@ const Expenses2Table = ({ data, handleDelete }: Expenses2Props) => {
         <TableBody>
           {data?.map((expense: any) => (
             <TableRow key={expense.id}>
-              <TableCell>{expense.total}</TableCell>
               <TableCell>{expense.oil}</TableCell>
               <TableCell>{expense.dayactir}</TableCell>
               <TableCell>{expense.spareParts}</TableCell>
               <TableCell>{expense.smallExpense}</TableCell>
               <TableCell>{expense.description}</TableCell>
-              <TableCell>{expense.salary}</TableCell>
               <TableCell>{expense.netTotal}</TableCell>
               <TableCell>{formatDate(expense.expense_date)}</TableCell>
               <TableCell className="flex items-center gap-2">

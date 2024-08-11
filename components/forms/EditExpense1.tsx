@@ -47,13 +47,10 @@ const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
       waterLaydh,
       salary,
       expenses,
-      feePercentage,
       description,
       income,
     } = form;
     const total = fuel + shaxaad + internet + waterLaydh + salary + expenses;
-
-    const netAmount = total - feePercentage;
 
     setIsLoading(true);
 
@@ -67,10 +64,8 @@ const EditExpense1 = ({ id, form, setForm }: EditExpense1Props) => {
         salary: salary,
         expenses: expenses,
         description: description,
-        feePercentage: feePercentage,
         expense_date: date,
-        total: total,
-        netIncome: netAmount,
+        netIncome: total,
       });
       if (resp) {
         router.push('/dashboard/expense');

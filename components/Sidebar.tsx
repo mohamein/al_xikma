@@ -65,6 +65,13 @@ const Sidebar = () => {
               <SiExpensify size={20} />
               Expenses 2
             </Link>
+            <Link
+              className="flex items-center gap-2"
+              href="/dashboard/monthExpenses"
+            >
+              <SiExpensify size={20} />
+              Month Expenses
+            </Link>
             <Link className="flex items-center gap-2" href="/dashboard/invoice">
               <FaFileInvoice size={20} />
               Invoices

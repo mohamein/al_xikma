@@ -19,11 +19,7 @@ export const createExpense1 = async (data: any) => {
 
 export const getAllExpenses1 = async () => {
   try {
-    const expense = await db.expense1.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+    const expense = await db.expense1.findMany();
 
     revalidatePath('/dashboard/expense');
 
@@ -95,11 +91,7 @@ export const createExpense2 = async (data: any) => {
 
 export const getAllExpenses2 = async () => {
   try {
-    const expense = await db.expense2.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+    const expense = await db.expense2.findMany();
     revalidatePath('/dashboard/expense1');
     return expense;
   } catch (err) {

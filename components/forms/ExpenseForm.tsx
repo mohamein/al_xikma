@@ -25,7 +25,6 @@ import { format } from 'date-fns';
 const ExpenseForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [income, setIncome] = useState<any>([]);
   const [date, setDate] = useState<Date>();
   const form = useForm<z.infer<typeof expenseValidation>>({
     resolver: zodResolver(expenseValidation),
@@ -37,8 +36,6 @@ const ExpenseForm = () => {
       salary: 0,
       expenses: 0,
       description: '',
-      feePercentage: 0,
-      total: 0,
       netIncome: 0,
     },
   });
@@ -54,10 +51,8 @@ const ExpenseForm = () => {
         salary,
         expenses,
         description,
-        feePercentage,
       } = values;
       const total1 = fuel + waterLaydh + internet + shaxaad + expenses + salary;
-      const netAmount = total1 - feePercentage;
 
       const expenseData = await createExpense1({
         fuel: fuel,
@@ -67,10 +62,9 @@ const ExpenseForm = () => {
         salary: salary,
         expenses: expenses,
         description: description,
-        total: total1,
-        feePercentage: feePercentage,
         expense_date: date,
-        netIncome: netAmount,
+        total: total1,
+        netIncome: total1,
       });
 
       if (expenseData) {
@@ -144,14 +138,6 @@ const ExpenseForm = () => {
           label="Description:"
           placeholder="Enter description..."
         />
-        <FormFields
-          control={form.control}
-          type="number"
-          name="feePercentage"
-          label="Khidmada:"
-          placeholder="Khidmada..."
-        />
-
         <div className="mt-7">
           <Popover>
             <PopoverTrigger asChild>
