@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Card from '@/components/Card';
 import { LineGraph } from '@/components/Line';
 import { DoughnutChart } from '@/components/DoughnutChart';
-import { getAllExpenses2 } from '@/lib/actions/expense.actions';
+import { getAllMonthExpense } from '@/lib/actions/month.actions';
 import { getAllInvoice } from '@/lib/actions/invoice.actions';
 import { getAllFinal } from '@/lib/actions/final.actions';
 
@@ -15,10 +15,10 @@ const Dashboard = () => {
   const [invoiceLength, setInvoiceLength] = useState(0);
 
   const fetchExpense = async () => {
-    const expenseData: any = await getAllExpenses2();
+    const expenseData: any = await getAllMonthExpense();
     let temp: number = 0;
     for (let i = 0; i < expenseData?.length; i++) {
-      temp += parseFloat(expenseData[i].netTotal);
+      temp += parseFloat(expenseData[i].total);
     }
 
     setIncome(temp);
