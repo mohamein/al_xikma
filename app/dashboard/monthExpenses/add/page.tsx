@@ -83,9 +83,9 @@ const AddMonthExpenses = () => {
     setIsLoading(true);
     try {
       const { salary, feePercentage } = values;
-      const result1 = expense1 - feePercentage;
+      const result1 = sales + expense1 - feePercentage;
       const result2 = expense2 + result1 - salary;
-      const netTotal = sales - result2;
+      const netTotal = result2;
       const expense = await createMonthExpense({
         expenses1: expense1,
         feePercentage: feePercentage,
