@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Table,
   TableBody,
@@ -6,7 +7,10 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/table';
-const MonthExpenseTable = ({ data }: any) => {
+import { Button } from '@/components/ui/button';
+import { FaTrash, FaEdit } from 'react-icons/fa';
+
+const MonthExpenseTable = ({ data, handleDelete }: any) => {
   const formatDate = (date: Date) => {
     const dateOptions: any = {
       year: 'numeric',
@@ -30,6 +34,7 @@ const MonthExpenseTable = ({ data }: any) => {
             <TableHead className="text-[#5874c7]">Sales:</TableHead>
             <TableHead className="text-[#5874c7]">Net Total:</TableHead>
             <TableHead className="text-[#5874c7]">Date:</TableHead>
+            <TableHead className="text-[#5874c7]">Actions:</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,6 +49,14 @@ const MonthExpenseTable = ({ data }: any) => {
               <TableCell>{expense?.sales}</TableCell>
               <TableCell>{expense?.total}</TableCell>
               <TableCell>{formatDate(expense?.date)}</TableCell>
+              <TableCell>
+                <Link
+                  className="text-green-500"
+                  href={`/dashboard/monthExpenses/edit/${expense.id}`}
+                >
+                  <FaEdit size={18} />
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

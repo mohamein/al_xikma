@@ -14,6 +14,7 @@ const MonthExpenses = () => {
   useEffect(() => {
     fetchMonthExpense();
   }, []);
+
   return (
     <div className="space-y-4 px-4">
       <h2 className="text-slate-800 font-semibold text-2xl">Month Expenses</h2>
