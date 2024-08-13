@@ -47,7 +47,7 @@ const CraneTable = ({ data, id, handleDelete }: TableProps) => {
               <TableCell>{crane.description}</TableCell>
               <TableCell>{crane.price}</TableCell>
               <TableCell>{crane.receipt_no}</TableCell>
-              <TableCell>{formatDate(crane.createdAt)}</TableCell>
+              <TableCell>{formatDate(crane.date)}</TableCell>
               <TableCell className="flex items-center gap-2">
                 <Link
                   className="text-green-500"

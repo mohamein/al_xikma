@@ -13,36 +13,41 @@ const Dashboard = () => {
   const [sales, setSales] = useState<any>([]);
   const [invoiceLength, setInvoiceLength] = useState(0);
 
-  // Function to format the date as 'YYYY-MM-DD'
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
+  // // Function to format the date as 'YYYY-MM-DD'
+  // const formatDate = (date: Date) => {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, '0');
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   return `${year}-${month}-${day}`;
+  // };
 
-  // Function to get the current month in 'YYYY-MM' format
-  const getCurrentMonth = () => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    return `${year}-${month}`;
-  };
+  // // Function to get the current month in 'YYYY-MM' format
+  // const getCurrentMonth = () => {
+  //   const now = new Date();
+  //   const year = now.getFullYear();
+  //   const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  //   return `${year}-${month}`;
+  // };
 
-  const groupExpensesByMonth = (expense: any) => {
-    return expense?.reduce((acc: any, data: any) => {
-      const month = formatDate(data.date).slice(0, 7);
-      if (!acc[month]) {
-        acc[month] = 0;
-      }
-      acc[month] += data.total;
+  // const groupExpensesByMonth = (expense: any) => {
+  //   return expense?.reduce((acc: any, data: any) => {
+  //     const month = formatDate(data.date).slice(0, 7);
+  //     if (!acc[month]) {
+  //       acc[month] = 0;
+  //     }
+  //     acc[month] += data.total;
 
-      return acc;
-    }, {});
-  };
+  //     return acc;
+  //   }, {});
+  // };
   const fetchExpense = async () => {
     const expenseData: any = await getAllMonthExpense();
-    setIncome(expenseData);
+    let temp: number = 0;
+    for (let i = 0; i < expenseData?.length; i++) {
+      temp += parseFloat(expenseData[i].total);
+    }
+
+    setIncome(temp);
   };
 
   const fetchSales = async () => {
@@ -71,11 +76,11 @@ const Dashboard = () => {
     fetchInvoice();
   }, []);
 
-  const currentMonth = getCurrentMonth();
-  const totalByDate = groupExpensesByMonth(income);
+  // const currentMonth = getCurrentMonth();
+  // const totalByDate = groupExpensesByMonth(income);
 
-  const currentMonthTotal = totalByDate[currentMonth] || 0;
-  
+  // const currentMonthTotal = totalByDate[currentMonth] || 0;
+
   return (
     <>
       {/* cards */}
@@ -95,9 +100,7 @@ const Dashboard = () => {
               <h3 className="text-[15px] font-medium text-slate-400">
                 Net Income
               </h3>
-              <h2 className="text-2xl text-slate-800 font-bold">
-                ${currentMonthTotal}
-              </h2>
+              <h2 className="text-2xl text-slate-800 font-bold">${income}</h2>
             </div>
           </Card>
           <Card className="bg-white">

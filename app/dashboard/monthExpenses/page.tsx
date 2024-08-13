@@ -1,7 +1,8 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
+import { useReactToPrint } from 'react-to-print';
 import MonthExpenseTable from '@/components/MonthExpenseTable';
 import { getAllMonthExpense } from '@/lib/actions/month.actions';
 const MonthExpenses = () => {
@@ -15,6 +16,9 @@ const MonthExpenses = () => {
     fetchMonthExpense();
   }, []);
 
+  const handlePrint = useReactToPrint({
+    documentTitle: 'Month Expenses',
+  });
   return (
     <div className="space-y-4 px-4">
       <h2 className="text-slate-800 font-semibold text-2xl">Month Expenses</h2>
@@ -27,7 +31,7 @@ const MonthExpenses = () => {
       </Link>
 
       {/* Table */}
-      <MonthExpenseTable data={data} />
+      <MonthExpenseTable handlePrint={handlePrint} data={data} />
     </div>
   );
 };

@@ -9,8 +9,11 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-
-const MonthExpenseTable = ({ data, handleDelete }: any) => {
+interface MonthExpenseProps {
+  data: any;
+  handlePrint: () => void;
+}
+const MonthExpenseTable = ({ data, handlePrint }: MonthExpenseProps) => {
   const formatDate = (date: Date) => {
     const dateOptions: any = {
       year: 'numeric',
