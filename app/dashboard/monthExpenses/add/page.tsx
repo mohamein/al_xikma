@@ -22,6 +22,7 @@ import { Calendar } from '@/components/ui/calendar';
 import SubmitButton from '@/components/SubmitButton';
 import FormFields from '@/components/FormFields';
 import { monthExpenseValidation } from '@/lib/validation';
+import { getAllSalary } from '@/lib/actions/salary.actions';
 import {
   getAllExpenses1,
   getAllExpenses2,
@@ -35,8 +36,18 @@ const AddMonthExpenses = () => {
   const [expense1, setExpense1] = useState<any>([]);
   const [expense2, setExpense2] = useState<any>([]);
   const [sales, setSales] = useState<any>([]);
+  const [salaryData, setSalaryData] = useState<any>([]);
   const [date, setDate] = useState<Date>();
 
+  const fetchSalary = async () => {
+    const salaryData: any = await getAllSalary();
+    let temp: number = 0;
+    for (let i = 0; i < salaryData?.length; i++) {
+      temp += parseFloat(salaryData[i]?.amount);
+    }
+    setSalaryData(temp);
+  };
+  // Expenses 1
   const fetchExpense1 = async () => {
     const expense: any = await getAllExpenses1();
     let temp: number = 0;
@@ -46,6 +57,7 @@ const AddMonthExpenses = () => {
     setExpense1(temp);
   };
 
+  // Expenses 2
   const fetchExpense2 = async () => {
     const expense: any = await getAllExpenses2();
 
@@ -55,6 +67,8 @@ const AddMonthExpenses = () => {
     }
     setExpense2(temp);
   };
+
+  // Total Sales
   const fetchSales = async () => {
     const salesData: any = await getAllFinal();
 
@@ -66,11 +80,12 @@ const AddMonthExpenses = () => {
   };
 
   useEffect(() => {
+    fetchSalary();
     fetchExpense1();
     fetchExpense2();
     fetchSales();
   }, []);
-  console.log(expense2);
+
   const form = useForm<z.infer<typeof monthExpenseValidation>>({
     resolver: zodResolver(monthExpenseValidation),
     defaultValues: {
@@ -79,20 +94,25 @@ const AddMonthExpenses = () => {
     },
   });
 
+  const feePercentageValue: number = Math.floor(
+    ((sales - expense1) * 17) / 100
+  );
+  console.log(feePercentageValue);
   async function onSubmit(values: z.infer<typeof monthExpenseValidation>) {
     setIsLoading(true);
     try {
-      const { salary, feePercentage } = values;
+      let { salary, feePercentage } = values;
+      feePercentage = feePercentageValue;
       const result = sales - expense1;
       const result1 = result - feePercentage;
-      const result2 = result1 - expense2 - salary;
+      const result2 = result1 - expense2 - salaryData;
       const netTotal = result2;
       const expense = await createMonthExpense({
         expenses1: expense1,
         feePercentage: feePercentage,
         subTotal1: result1,
         expenses2: expense2,
-        salary: salary,
+        salary: salaryData,
         subTotal2: result2,
         sales: sales,
         date: date,
@@ -121,28 +141,30 @@ const AddMonthExpenses = () => {
             <Label htmlFor="expenses1">Expenses 1</Label>
             <Input type="number" readOnly name="expenses1" value={expense1} />
           </div>
-          <FormFields
-            control={form.control}
-            type="number"
-            name="feePercentage"
-            label="Khidmada"
-            placeholder="Enter Here"
-          />
-          <FormFields
-            control={form.control}
-            type="number"
-            name="salary"
-            label="Mushahar"
-            placeholder="Enter Here"
-          />
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="khidmada">Khidmada:</Label>
+            <Input
+              type="number"
+              readOnly
+              name="khidmada"
+              value={feePercentageValue}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="salary">Salary 1</Label>
+            <Input type="number" readOnly name="salary" value={salaryData} />
+          </div>
+
           <div className="flex flex-col gap-2">
             <Label htmlFor="expenses2">Expenses 2:</Label>
             <Input type="number" readOnly name="expenses2" value={expense2} />
           </div>
+
           <div className="flex flex-col gap-2">
             <Label htmlFor="sales">Total Sales:</Label>
             <Input type="number" readOnly name="sales" value={sales} />
           </div>
+
           <div className="mt-7">
             <Popover>
               <PopoverTrigger asChild>

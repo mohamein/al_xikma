@@ -18,7 +18,6 @@ const MonthExpenses = () => {
   }, []);
 
   const handlePrint = useReactToPrint({
-    documentTitle: 'Month Expenses',
     content: () => contentRef.current,
   });
   return (
