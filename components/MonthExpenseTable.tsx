@@ -10,10 +10,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 interface MonthExpenseProps {
+  ref: any;
   data: any;
-  handlePrint: () => void;
 }
-const MonthExpenseTable = ({ data, handlePrint }: MonthExpenseProps) => {
+const MonthExpenseTable = ({ data, ref }: MonthExpenseProps) => {
   const formatDate = (date: Date) => {
     const dateOptions: any = {
       year: 'numeric',
@@ -24,7 +24,7 @@ const MonthExpenseTable = ({ data, handlePrint }: MonthExpenseProps) => {
     return date.toLocaleDateString(undefined, dateOptions);
   };
   return (
-    <div className="bg-white shadow-md">
+    <div className="bg-white shadow-md" ref={ref}>
       <Table>
         <TableHeader>
           <TableRow>
